@@ -114,7 +114,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+						<a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
 					</div>
 				</section>
 				
@@ -194,6 +194,66 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-iOS代码量统计" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/21/iOS代码量统计/" class="article-date">
+  	<time datetime="2015-11-21T11:53:47.000Z" itemprop="datePublished">2015-11-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/21/iOS代码量统计/">iOS代码量统计</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>打开终端</li>
+<li>cd到项目所在路径</li>
+<li>输入如下命令</li>
+</ol>
+<h3 id="统计整个工程的所有文件的代码量以及总量">统计整个工程的所有文件的代码量以及总量</h3><p><code>find . &quot;(&quot; -name &quot;*.m&quot; -or -name &quot;*.mm&quot; -or -name &quot;*.cpp&quot; -or -name &quot;*.h&quot; -or -name &quot;*.rss&quot; &quot;)&quot; -print | xargs wc -l</code></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-python爬虫小程序" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -221,7 +281,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="今天写一个特别简单的爬虫小程序，这个小程序可以爬一些网络上的图片">今天写一个特别简单的爬虫小程序，这个小程序可以爬一些网络上的图片</h3><pre><code><span class="keyword">import</span> urllib
-  <span class="keyword">import</span> re
+ <span class="keyword">import</span> re
 
    <span class="comment">#读取网页内容</span>
     <span class="function"><span class="keyword">def</span> <span class="title">getHtml</span><span class="params">(url)</span>:</span>
