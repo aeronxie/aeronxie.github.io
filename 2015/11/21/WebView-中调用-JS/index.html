@@ -3,68 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Git的简单使用 | Aeron_Xie</title>
+  <title>WebView 中调用 JS | Aeron_Xie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="首先在创建项目的时候，勾选Create Git repository on My Mac，创建一个本地仓库。
+  <meta name="description" content="#### UIWebView是iOS最常用的SDK之一，它有一个stringByEvaluatingJavaScriptFromString方法可以将javascript嵌入页面中，通过这个方法我们可以在iOS中与UIWebView中的网页元素交互。
 
-
-
-在每次修改完成的时候请选择Source Control 选项卡中的Commit 这个选项，并说明本次修改的内容
-
-
-
-如果要想实现无限次回滚，请打开终端，然后cd 进入当前项目路径
-
-
-执行 git reflog 就能看到所有版本的记录
-
-
-
-想要回到哪个版本，请执行 git res">
+ 使用stringByEvaluatingJavaScriptFromString方法，需要等UIWebView中的页面加载完成之后去调用。我们在">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git的简单使用">
-<meta property="og:url" content="http://yoursite.com/2015/11/21/Git的简单使用/index.html">
+<meta property="og:title" content="WebView 中调用 JS">
+<meta property="og:url" content="http://yoursite.com/2015/11/21/WebView-中调用-JS/index.html">
 <meta property="og:site_name" content="Aeron_Xie">
-<meta property="og:description" content="首先在创建项目的时候，勾选Create Git repository on My Mac，创建一个本地仓库。
+<meta property="og:description" content="#### UIWebView是iOS最常用的SDK之一，它有一个stringByEvaluatingJavaScriptFromString方法可以将javascript嵌入页面中，通过这个方法我们可以在iOS中与UIWebView中的网页元素交互。
 
-
-
-在每次修改完成的时候请选择Source Control 选项卡中的Commit 这个选项，并说明本次修改的内容
-
-
-
-如果要想实现无限次回滚，请打开终端，然后cd 进入当前项目路径
-
-
-执行 git reflog 就能看到所有版本的记录
-
-
-
-想要回到哪个版本，请执行 git res">
-<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/01.png">
-<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/01.png">
-<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/01.png">
-<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/03.png">
-<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/04.png">
-<meta property="og:updated_time" content="2015-11-21T12:11:41.000Z">
+ 使用stringByEvaluatingJavaScriptFromString方法，需要等UIWebView中的页面加载完成之后去调用。我们在">
+<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/003.png">
+<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/001.png">
+<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/002.png">
+<meta property="og:updated_time" content="2015-11-21T12:28:49.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Git的简单使用">
-<meta name="twitter:description" content="首先在创建项目的时候，勾选Create Git repository on My Mac，创建一个本地仓库。
+<meta name="twitter:title" content="WebView 中调用 JS">
+<meta name="twitter:description" content="#### UIWebView是iOS最常用的SDK之一，它有一个stringByEvaluatingJavaScriptFromString方法可以将javascript嵌入页面中，通过这个方法我们可以在iOS中与UIWebView中的网页元素交互。
 
-
-
-在每次修改完成的时候请选择Source Control 选项卡中的Commit 这个选项，并说明本次修改的内容
-
-
-
-如果要想实现无限次回滚，请打开终端，然后cd 进入当前项目路径
-
-
-执行 git reflog 就能看到所有版本的记录
-
-
-
-想要回到哪个版本，请执行 git res">
+ 使用stringByEvaluatingJavaScriptFromString方法，需要等UIWebView中的页面加载完成之后去调用。我们在">
   
     <link rel="alternative" href="/atom.xml" title="Aeron_Xie" type="application/atom+xml">
   
@@ -243,11 +202,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-Git的简单使用" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-WebView-中调用-JS" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/11/21/Git的简单使用/" class="article-date">
-  	<time datetime="2015-11-21T12:04:46.000Z" itemprop="datePublished">2015-11-21</time>
+      <a href="/2015/11/21/WebView-中调用-JS/" class="article-date">
+  	<time datetime="2015-11-21T12:22:09.000Z" itemprop="datePublished">2015-11-21</time>
 </a>
     </div>
   
@@ -260,7 +219,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Git的简单使用
+      WebView 中调用 JS
     </h1>
   
 
@@ -269,7 +228,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS-JS/">iOS JS</a></li></ul>
 	</div>
 
         
@@ -280,26 +239,72 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>首先在创建项目的时候，勾选Create Git repository on My Mac，创建一个本地仓库。</p>
+        <pre><code><span class="preprocessor">#### UIWebView是iOS最常用的SDK之一，它有一个stringByEvaluatingJavaScriptFromString方法可以将javascript嵌入页面中，通过这个方法我们可以在iOS中与UIWebView中的网页元素交互。</span>
+</code></pre><blockquote>
+<p> 使用stringByEvaluatingJavaScriptFromString方法，需要等UIWebView中的页面加载完成之后去调用。我们在界面上拖放一个UIWebView控件。在viewDidLoad中将百度主页加载到这个控件中，代码如下：</p>
 </blockquote>
-<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/01.png" width="50%"><br><img src="http://7xoijj.com1.z0.glb.clouddn.com/01.png" alt=""></p>
-<blockquote>
-<p>在每次修改完成的时候请选择Source Control 选项卡中的Commit 这个选项，并说明本次修改的内容</p>
+<pre><code>- (<span class="keyword">void</span>)viewDidLoad {
+    [<span class="keyword">super</span> viewDidLoad];
+
+        <span class="built_in">UIWebView</span> *web = [[<span class="built_in">UIWebView</span> alloc]init];
+    web<span class="variable">.delegate</span> = <span class="keyword">self</span>;
+    web<span class="variable">.frame</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.bounds</span>;
+    <span class="built_in">NSURLRequest</span> *request = [<span class="built_in">NSURLRequest</span> requestWithURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://www.baidu.com"</span>]];
+    [web loadRequest:request];
+    [<span class="keyword">self</span><span class="variable">.view</span> addSubview:web];
+}
+</code></pre><blockquote>
+<p>通过UIWebView的代理方法 <code>webViewDidFinishLoad</code> 获取整个页面，代码如下：</p>
 </blockquote>
-<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/01.png" alt=""></p>
-<blockquote>
-<p>如果要想实现无限次回滚，请打开终端，然后cd 进入当前项目路径</p>
+<pre><code>- (<span class="keyword">void</span>)webViewDidFinishLoad:(<span class="built_in">UIWebView</span> *)webView {
+
+<span class="built_in">NSString</span> *html = [webView stringByEvaluatingJavaScriptFromString:<span class="string">@"document.body.innerHTML;"</span>];
+<span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,html);
+
+}
+</code></pre><blockquote>
+<p>获取页面navs导航：</p>
 </blockquote>
-<ul>
-<li>执行 <code>git reflog</code> 就能看到所有版本的记录</li>
-</ul>
-<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/03.png" alt=""></p>
-<ul>
-<li>想要回到哪个版本，请执行 <code>git reset --hard  版本号</code> </li>
-</ul>
-<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/04.png" alt=""></p>
-<h2 id="这样我们就能实现无限次的回滚">这样我们就能实现无限次的回滚</h2>
+<pre><code><span class="tag">-</span> (void)<span class="tag">webViewDidFinishLoad</span>:(UIWebView *)<span class="tag">webView</span> {
+
+<span class="attr_selector">[webView stringByEvaluatingJavaScriptFromString:@"var removeObj = document.getElementById('navs');"]</span>;
+<span class="attr_selector">[webView stringByEvaluatingJavaScriptFromString:@"removeObj.parentNode.removeChild(removeObj);"]</span>;
+
+}
+</code></pre><blockquote>
+<p>删除一些不想要的东西</p>
+</blockquote>
+<pre><code>- (<span class="typename">void</span>)<span class="string">webViewDidFinishLoad:</span>(UIWebView *)webView {
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(<span class="number">0.1</span> * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
+    NSMutableString *js = [NSMutableString string];
+    <span class="comment">//删除常用网址</span>
+    [js <span class="string">appendString:</span>@<span class="string">"var removeNav = document.getElementById('nav');"</span>];
+    [js <span class="string">appendString:</span>@<span class="string">"removeNav.parentNode.removeChild(removeNav);"</span>];
+
+    <span class="comment">//删除购物</span>
+    [js <span class="string">appendString:</span>@<span class="string">"var removeShop = document.getElementById('shopping');"</span>];
+    [js <span class="string">appendString:</span>@<span class="string">"removeShop.parentNode.removeChild(removeShop);"</span>];
+
+    <span class="comment">//删除实时热点</span>
+    [js <span class="string">appendString:</span>@<span class="string">"var removeHot = document.getElementById('hotword');"</span>];
+    [js <span class="string">appendString:</span>@<span class="string">"removeHot.parentNode.removeChild(removeHot);"</span>];
+
+    <span class="comment">//删除底部bottom</span>
+    [js <span class="string">appendString:</span>@<span class="string">"var removeBottom = document.getElementById('bottom');"</span>];
+    [js <span class="string">appendString:</span>@<span class="string">"removeBottom.parentNode.removeChild(removeBottom);"</span>];
+
+    <span class="comment">//执行JS代码</span>
+    [webView <span class="string">stringByEvaluatingJavaScriptFromString:</span>js];
+
+    });   
+
+}
+</code></pre><h2 id="最后的效果：">最后的效果：</h2><p><img src="http://7xoijj.com1.z0.glb.clouddn.com/003.png" alt=""></p>
+<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/001.png" alt=""></p>
+<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/002.png" alt=""></p>
+
       
     </div>
     
@@ -308,18 +313,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/11/21/WebView-中调用-JS/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          WebView 中调用 JS
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/11/21/iOS代码量统计/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">iOS代码量统计</div>
+    <a href="/2015/11/21/Git的简单使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Git的简单使用</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -348,7 +344,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Git的简单使用" data-title="Git的简单使用" data-url="http://yoursite.com/2015/11/21/Git的简单使用/"></div>
+	<div class="ds-thread" data-thread-key="WebView-中调用-JS" data-title="WebView 中调用 JS" data-url="http://yoursite.com/2015/11/21/WebView-中调用-JS/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

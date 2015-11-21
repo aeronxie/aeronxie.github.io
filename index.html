@@ -114,7 +114,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+						<a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/iOS-JS/" style="font-size: 10px;">iOS JS</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
 					</div>
 				</section>
 				
@@ -193,6 +193,125 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-WebView-中调用-JS" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/21/WebView-中调用-JS/" class="article-date">
+  	<time datetime="2015-11-21T12:22:09.000Z" itemprop="datePublished">2015-11-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/21/WebView-中调用-JS/">WebView 中调用 JS</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code><span class="preprocessor">#### UIWebView是iOS最常用的SDK之一，它有一个stringByEvaluatingJavaScriptFromString方法可以将javascript嵌入页面中，通过这个方法我们可以在iOS中与UIWebView中的网页元素交互。</span>
+</code></pre><blockquote>
+<p> 使用stringByEvaluatingJavaScriptFromString方法，需要等UIWebView中的页面加载完成之后去调用。我们在界面上拖放一个UIWebView控件。在viewDidLoad中将百度主页加载到这个控件中，代码如下：</p>
+</blockquote>
+<pre><code>- (<span class="keyword">void</span>)viewDidLoad {
+    [<span class="keyword">super</span> viewDidLoad];
+
+        <span class="built_in">UIWebView</span> *web = [[<span class="built_in">UIWebView</span> alloc]init];
+    web<span class="variable">.delegate</span> = <span class="keyword">self</span>;
+    web<span class="variable">.frame</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.bounds</span>;
+    <span class="built_in">NSURLRequest</span> *request = [<span class="built_in">NSURLRequest</span> requestWithURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://www.baidu.com"</span>]];
+    [web loadRequest:request];
+    [<span class="keyword">self</span><span class="variable">.view</span> addSubview:web];
+}
+</code></pre><blockquote>
+<p>通过UIWebView的代理方法 <code>webViewDidFinishLoad</code> 获取整个页面，代码如下：</p>
+</blockquote>
+<pre><code>- (<span class="keyword">void</span>)webViewDidFinishLoad:(<span class="built_in">UIWebView</span> *)webView {
+
+<span class="built_in">NSString</span> *html = [webView stringByEvaluatingJavaScriptFromString:<span class="string">@"document.body.innerHTML;"</span>];
+<span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,html);
+
+}
+</code></pre><blockquote>
+<p>获取页面navs导航：</p>
+</blockquote>
+<pre><code><span class="tag">-</span> (void)<span class="tag">webViewDidFinishLoad</span>:(UIWebView *)<span class="tag">webView</span> {
+
+<span class="attr_selector">[webView stringByEvaluatingJavaScriptFromString:@"var removeObj = document.getElementById('navs');"]</span>;
+<span class="attr_selector">[webView stringByEvaluatingJavaScriptFromString:@"removeObj.parentNode.removeChild(removeObj);"]</span>;
+
+}
+</code></pre><blockquote>
+<p>删除一些不想要的东西</p>
+</blockquote>
+<pre><code>- (<span class="typename">void</span>)<span class="string">webViewDidFinishLoad:</span>(UIWebView *)webView {
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(<span class="number">0.1</span> * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
+    NSMutableString *js = [NSMutableString string];
+    <span class="comment">//删除常用网址</span>
+    [js <span class="string">appendString:</span>@<span class="string">"var removeNav = document.getElementById('nav');"</span>];
+    [js <span class="string">appendString:</span>@<span class="string">"removeNav.parentNode.removeChild(removeNav);"</span>];
+
+    <span class="comment">//删除购物</span>
+    [js <span class="string">appendString:</span>@<span class="string">"var removeShop = document.getElementById('shopping');"</span>];
+    [js <span class="string">appendString:</span>@<span class="string">"removeShop.parentNode.removeChild(removeShop);"</span>];
+
+    <span class="comment">//删除实时热点</span>
+    [js <span class="string">appendString:</span>@<span class="string">"var removeHot = document.getElementById('hotword');"</span>];
+    [js <span class="string">appendString:</span>@<span class="string">"removeHot.parentNode.removeChild(removeHot);"</span>];
+
+    <span class="comment">//删除底部bottom</span>
+    [js <span class="string">appendString:</span>@<span class="string">"var removeBottom = document.getElementById('bottom');"</span>];
+    [js <span class="string">appendString:</span>@<span class="string">"removeBottom.parentNode.removeChild(removeBottom);"</span>];
+
+    <span class="comment">//执行JS代码</span>
+    [webView <span class="string">stringByEvaluatingJavaScriptFromString:</span>js];
+
+    });   
+
+}
+</code></pre><h2 id="最后的效果：">最后的效果：</h2><p><img src="http://7xoijj.com1.z0.glb.clouddn.com/003.png" alt=""></p>
+<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/001.png" alt=""></p>
+<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/002.png" alt=""></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS-JS/">iOS JS</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-Git的简单使用" class="article article-type-post" itemscope itemprop="blogPost">
   
