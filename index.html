@@ -220,14 +220,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <pre><code><span class="preprocessor">#### UIWebView是iOS最常用的SDK之一，它有一个stringByEvaluatingJavaScriptFromString方法可以将javascript嵌入页面中，通过这个方法我们可以在iOS中与UIWebView中的网页元素交互。</span>
-</code></pre><blockquote>
+        <h3 id="UIWebView是iOS最常用的SDK之一，它有一个stringByEvaluatingJavaScriptFromString方法可以将javascript嵌入页面中，通过这个方法我们可以在iOS中与UIWebView中的网页元素交互。">UIWebView是iOS最常用的SDK之一，它有一个stringByEvaluatingJavaScriptFromString方法可以将javascript嵌入页面中，通过这个方法我们可以在iOS中与UIWebView中的网页元素交互。</h3><blockquote>
 <p> 使用stringByEvaluatingJavaScriptFromString方法，需要等UIWebView中的页面加载完成之后去调用。我们在界面上拖放一个UIWebView控件。在viewDidLoad中将百度主页加载到这个控件中，代码如下：</p>
 </blockquote>
 <pre><code>- (<span class="keyword">void</span>)viewDidLoad {
     [<span class="keyword">super</span> viewDidLoad];
 
-        <span class="built_in">UIWebView</span> *web = [[<span class="built_in">UIWebView</span> alloc]init];
+    <span class="built_in">UIWebView</span> *web = [[<span class="built_in">UIWebView</span> alloc]init];
     web<span class="variable">.delegate</span> = <span class="keyword">self</span>;
     web<span class="variable">.frame</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.bounds</span>;
     <span class="built_in">NSURLRequest</span> *request = [<span class="built_in">NSURLRequest</span> requestWithURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://www.baidu.com"</span>]];
@@ -239,8 +238,8 @@
 </blockquote>
 <pre><code>- (<span class="keyword">void</span>)webViewDidFinishLoad:(<span class="built_in">UIWebView</span> *)webView {
 
-<span class="built_in">NSString</span> *html = [webView stringByEvaluatingJavaScriptFromString:<span class="string">@"document.body.innerHTML;"</span>];
-<span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,html);
+    <span class="built_in">NSString</span> *html = [webView stringByEvaluatingJavaScriptFromString:<span class="string">@"document.body.innerHTML;"</span>];
+    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,html);
 
 }
 </code></pre><blockquote>
@@ -248,8 +247,8 @@
 </blockquote>
 <pre><code><span class="tag">-</span> (void)<span class="tag">webViewDidFinishLoad</span>:(UIWebView *)<span class="tag">webView</span> {
 
-<span class="attr_selector">[webView stringByEvaluatingJavaScriptFromString:@"var removeObj = document.getElementById('navs');"]</span>;
-<span class="attr_selector">[webView stringByEvaluatingJavaScriptFromString:@"removeObj.parentNode.removeChild(removeObj);"]</span>;
+    <span class="attr_selector">[webView stringByEvaluatingJavaScriptFromString:@"var removeObj = document.getElementById('navs');"]</span>;
+    <span class="attr_selector">[webView stringByEvaluatingJavaScriptFromString:@"removeObj.parentNode.removeChild(removeObj);"]</span>;
 
 }
 </code></pre><blockquote>
