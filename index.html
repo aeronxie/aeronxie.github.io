@@ -220,71 +220,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="UIWebView是iOS最常用的SDK之一，它有一个stringByEvaluatingJavaScriptFromString方法可以将javascript嵌入页面中，通过这个方法我们可以在iOS中与UIWebView中的网页元素交互。">UIWebView是iOS最常用的SDK之一，它有一个stringByEvaluatingJavaScriptFromString方法可以将javascript嵌入页面中，通过这个方法我们可以在iOS中与UIWebView中的网页元素交互。</h3><blockquote>
-<p> 使用stringByEvaluatingJavaScriptFromString方法，需要等UIWebView中的页面加载完成之后去调用。我们在界面上拖放一个UIWebView控件。在viewDidLoad中将百度主页加载到这个控件中，代码如下：</p>
-</blockquote>
-<pre><code>- (<span class="keyword">void</span>)viewDidLoad {
-    [<span class="keyword">super</span> viewDidLoad];
-
-    <span class="built_in">UIWebView</span> *web = [[<span class="built_in">UIWebView</span> alloc]init];
-    web<span class="variable">.delegate</span> = <span class="keyword">self</span>;
-    web<span class="variable">.frame</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.bounds</span>;
-    <span class="built_in">NSURLRequest</span> *request = [<span class="built_in">NSURLRequest</span> requestWithURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://www.baidu.com"</span>]];
-    [web loadRequest:request];
-    [<span class="keyword">self</span><span class="variable">.view</span> addSubview:web];
-}
-</code></pre><blockquote>
-<p>通过UIWebView的代理方法 <code>webViewDidFinishLoad</code> 获取整个页面，代码如下：</p>
-</blockquote>
-<pre><code>- (<span class="keyword">void</span>)webViewDidFinishLoad:(<span class="built_in">UIWebView</span> *)webView {
-
-    <span class="built_in">NSString</span> *html = [webView stringByEvaluatingJavaScriptFromString:<span class="string">@"document.body.innerHTML;"</span>];
-    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,html);
-
-}
-</code></pre><blockquote>
-<p>获取页面navs导航：</p>
-</blockquote>
-<pre><code><span class="tag">-</span> (void)<span class="tag">webViewDidFinishLoad</span>:(UIWebView *)<span class="tag">webView</span> {
-
-    <span class="attr_selector">[webView stringByEvaluatingJavaScriptFromString:@"var removeObj = document.getElementById('navs');"]</span>;
-    <span class="attr_selector">[webView stringByEvaluatingJavaScriptFromString:@"removeObj.parentNode.removeChild(removeObj);"]</span>;
-
-}
-</code></pre><blockquote>
-<p>删除一些不想要的东西</p>
-</blockquote>
-<pre><code>- (<span class="typename">void</span>)<span class="string">webViewDidFinishLoad:</span>(UIWebView *)webView {
-
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(<span class="number">0.1</span> * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-
-    NSMutableString *js = [NSMutableString string];
-    <span class="comment">//删除常用网址</span>
-    [js <span class="string">appendString:</span>@<span class="string">"var removeNav = document.getElementById('nav');"</span>];
-    [js <span class="string">appendString:</span>@<span class="string">"removeNav.parentNode.removeChild(removeNav);"</span>];
-
-    <span class="comment">//删除购物</span>
-    [js <span class="string">appendString:</span>@<span class="string">"var removeShop = document.getElementById('shopping');"</span>];
-    [js <span class="string">appendString:</span>@<span class="string">"removeShop.parentNode.removeChild(removeShop);"</span>];
-
-    <span class="comment">//删除实时热点</span>
-    [js <span class="string">appendString:</span>@<span class="string">"var removeHot = document.getElementById('hotword');"</span>];
-    [js <span class="string">appendString:</span>@<span class="string">"removeHot.parentNode.removeChild(removeHot);"</span>];
-
-    <span class="comment">//删除底部bottom</span>
-    [js <span class="string">appendString:</span>@<span class="string">"var removeBottom = document.getElementById('bottom');"</span>];
-    [js <span class="string">appendString:</span>@<span class="string">"removeBottom.parentNode.removeChild(removeBottom);"</span>];
-
-    <span class="comment">//执行JS代码</span>
-    [webView <span class="string">stringByEvaluatingJavaScriptFromString:</span>js];
-
-    });   
-
-}
-</code></pre><h2 id="最后的效果：">最后的效果：</h2><p><img src="http://7xoijj.com1.z0.glb.clouddn.com/003.png" alt=""></p>
-<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/001.png" alt=""></p>
-<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/002.png" alt=""></p>
-
+        <h3 id="UIWebView是iOS最常用的SDK之一，它有一个stringByEvaluatingJavaScriptFromString方法可以将javascript嵌入页面中，通过这个方法我们可以在iOS中与UIWebView中的网页元素交互。">UIWebView是iOS最常用的SDK之一，它有一个stringByEvaluatingJavaScriptFromString方法可以将javascript嵌入页面中，通过这个方法我们可以在iOS中与UIWebView中的网页元素交互。</h3>
       
     </div>
     
@@ -297,6 +233,10 @@
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/11/21/WebView-中调用-JS/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -341,23 +281,6 @@
         <blockquote>
 <p>首先在创建项目的时候，勾选Create Git repository on My Mac，创建一个本地仓库。</p>
 </blockquote>
-<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/01.png" width="50%"><br><img src="http://7xoijj.com1.z0.glb.clouddn.com/01.png" alt=""></p>
-<blockquote>
-<p>在每次修改完成的时候请选择Source Control 选项卡中的Commit 这个选项，并说明本次修改的内容</p>
-</blockquote>
-<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/01.png" alt=""></p>
-<blockquote>
-<p>如果要想实现无限次回滚，请打开终端，然后cd 进入当前项目路径</p>
-</blockquote>
-<ul>
-<li>执行 <code>git reflog</code> 就能看到所有版本的记录</li>
-</ul>
-<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/03.png" alt=""></p>
-<ul>
-<li>想要回到哪个版本，请执行 <code>git reset --hard  版本号</code> </li>
-</ul>
-<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/04.png" alt=""></p>
-<h2 id="这样我们就能实现无限次的回滚">这样我们就能实现无限次的回滚</h2>
       
     </div>
     
@@ -370,6 +293,10 @@
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/11/21/Git的简单使用/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -471,30 +398,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="今天写一个特别简单的爬虫小程序，这个小程序可以爬一些网络上的图片">今天写一个特别简单的爬虫小程序，这个小程序可以爬一些网络上的图片</h3><pre><code><span class="keyword">import</span> urllib
- <span class="keyword">import</span> re
-
-   <span class="comment">#读取网页内容</span>
-    <span class="function"><span class="keyword">def</span> <span class="title">getHtml</span><span class="params">(url)</span>:</span>
-        <span class="keyword">return</span> urllib.urlopen(url).read()
-
-    <span class="comment">#获取图片</span>
-    <span class="function"><span class="keyword">def</span> <span class="title">getImg</span><span class="params">(html)</span>:</span>
-      reg = <span class="string">r'src="(.+?\.jpg)" pic_ext'</span>
-       imgre = re.compile(reg)
-       imagelist = re.findall(imgre,html)
-       x= <span class="number">0</span>
-       <span class="keyword">for</span> imgurl <span class="keyword">in</span> imagelist:
-       urllib.urlretrieve(imgurl,<span class="string">'%s.jpg'</span> % x)
-       x+=<span class="number">1</span>
-  <span class="comment">#图片地址</span>
-   print(imgurl)
-
-   html = getHtml(<span class="string">"http://www.baidu.com"</span>)
-
-   getImg(html)
-</code></pre><h3 id="最后我们能看到下载的图片">最后我们能看到下载的图片</h3><p><img src="http://7xoijj.com1.z0.glb.clouddn.com/屏幕快照%202015-11-21%20下午7.42.13.png" alt="">         </p>
-
+        <h3 id="今天写一个特别简单的爬虫小程序，这个小程序可以爬一些网络上的图片">今天写一个特别简单的爬虫小程序，这个小程序可以爬一些网络上的图片</h3>
       
     </div>
     
@@ -507,6 +411,10 @@
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/11/21/python爬虫小程序/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -548,104 +456,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Hexo简介">Hexo简介</h1><p><a href="https://github.com/hexojs/hexo" target="_blank" rel="external">Hexo</a>是一款基于Node.js的静态博客框架。目前在GitHub上已有7285 star 和 1207 fork.Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<h3 id="特性">特性</h3><ul>
-<li><p>风一般的速度<br>Hexo基于Node.js，支持多进程，几百篇文章也可以秒生成。</p>
-</li>
-<li><p>流畅的撰写<br>支持GitHub Flavored Markdown和所有Octopress的插件。</p>
-</li>
-<li><p>扩展性<br>Hexo支持EJS、Swig和Stylus。通过插件支持Haml、Jade和Less.</p>
-</li>
-</ul>
-<h3 id="优势">优势</h3><ul>
-<li><p>首先它支持 Markdown，这样我们撰写博客就会变得十分方便。</p>
-</li>
-<li><p>Hexo 的扩展性也十分强大，它支持EJS、Swig，我们还可以通过插件让它支持Haml，Jade，Less等。</p>
-</li>
-<li><p>Hexo 支持多线程，生成几百篇文章所需要的时间只不过几秒钟。</p>
-</li>
-<li><p>Hexo 支持一键部署，只需要一条命令就可以把博客发布到 GitHub 上。</p>
-</li>
-</ul>
-<p>-</p>
-<p>下面我们就来搭建这个博客，首先要搭建这个博客，必须要安装<a href="http://nodejs.cn/" target="_blank" rel="external">Node.js</a>,搭建环境完成之后，我们需要安装Hexo框架。</p>
-<h3 id="安装">安装</h3><p>打开终端，输入命令：</p>
-<p><code>$ npm install hexo -g</code> </p>
-<p>回车</p>
-<p>输完之后，等等。。报错？这是啥玩意<br><img src="http://7xoijj.com1.z0.glb.clouddn.com/1.png" alt=""></p>
-<p>这。。这是啥？ Google之后，发现只需要输入命令</p>
-<p><code>$ sudo npm install --unsafe-perm --verbose -g hexo</code></p>
-<p>就可以了。</p>
-<p>###安装完成之后，我们开始新建一个项目<br><code>$ cd /Users/fay</code> 进去一个新的文件夹</p>
-<p>然后 <code>$ hexo init hexoblog</code>  hexoblog是自己起的一个项目名称</p>
-<p>Hexo 会在这个文件夹内自动生成文件。</p>
-<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/6.png" alt=""><br>之后我们需要安装Hexo需要的模块</p>
-<p><code>$ cd hexoBlog</code></p>
-<p><code>$ npm install</code></p>
-<p>现在我们就把Hexo安装好了。</p>
-<h3 id="新建博客">新建博客</h3><ul>
-<li>我们来新建一篇博客</li>
-</ul>
-<p><code>$ hexo new &quot;hello world&quot;</code>   #快捷键 ‘hexo n’</p>
-<p>hello world是我们的博客标题  </p>
-<ul>
-<li>生成静态网站</li>
-</ul>
-<p><code>$ hexo generate</code> #快捷键 ‘hexo g’</p>
-<ul>
-<li>生成本地链接</li>
-</ul>
-<p><code>$ hexo server</code> #快捷键 ‘hexo s’</p>
-<p><img src="/Users/fay/Blog/hexoblog/source/images/10.png" alt=""></p>
-<p>Hexo默认的端口是<em>4000</em>,打开浏览器输入<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> 看看生成的静态博客.</p>
-<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/7.png" alt=""></p>
-<p>我们的博客就已经写好了。</p>
-<p>写好之后我们怎么部署到<a href="https://github.com/" target="_blank" rel="external">github.com</a>上呢？</p>
-<h3 id="部署博客">部署博客</h3><h4 id="首先我们要知道一些关于_GitHub_Pages:">首先我们要知道一些关于 GitHub Pages:</h4><ol>
-<li>GitHub Pages 是免费的静态站点;</li>
-<li>搭建简单而且免费;</li>
-<li>自带主题，支持自定义页面;</li>
-<li>支持绑定域名;</li>
-</ol>
-<p>我们可以看到，GitHub Pages 十分适合我们在上面挂我们的博客。</p>
-<h4 id="在_GitHub_上搭建我们的博客有两种方式：">在 GitHub 上搭建我们的博客有两种方式：</h4><ul>
-<li>为个人或组织建立 Pages。</li>
-<li>为某个项目建立 Pages。</li>
-</ul>
-<p>进入github后我们需要注册一个直接帐号，如果有帐号的直接登录即可。</p>
-<h5 id="新建仓库">新建仓库</h5><ul>
-<li>在 自己或组织 下建立一个名为 <code>aeronxie.github.io</code> 的仓库。</li>
-</ul>
-<blockquote>
-<p>注意:仓库名称必须跟自己的登录名称相同</p>
-</blockquote>
-<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/11.png" alt=""></p>
-<ul>
-<li>之后我怕们就可以使用 <code>http://aeron.github.io</code> 来访问我们的博客了</li>
-</ul>
-<p>###在Hexo上配置并部署到Github上</p>
-<p>在终端进入到 <code>hexoblog</code> 目录后，找到并打开 <code>_config.yml</code> 这个文件</p>
-<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/13副本.png" alt=""></p>
-<p>注意最后的那个     </p>
-<pre><code><span class="attribute">deploy</span>:
-    <span class="attribute">type</span>:
-    <span class="attribute">repository</span>:
-    <span class="attribute">branch</span>:
-</code></pre><p>分别填上 <code>git</code> <code>github的地址</code> <code>master</code></p>
-<h3 id="最后将博客部署到Github上">最后将博客部署到Github上</h3><p>打开终端并输入: <code>$ hexo deploy</code> #快捷键 hexo d</p>
-<h2 id="最后我们的博客就部署完毕了！">最后我们的博客就部署完毕了！</h2><h2 id="总结：">总结：</h2><h3 id="搭建Hexo">搭建Hexo</h3><pre><code><span class="variable">$ </span>npm install hexo -g        <span class="comment"># 安装 Hexo</span>
-<span class="variable">$ </span>hexo init hexoBlog        <span class="comment"># 新建 Hexo 项目 &lt;hexoBlog&gt;</span>
-<span class="variable">$ </span>cd hexoBlog                <span class="comment"># 进入 hexoBlog</span>
-<span class="variable">$ </span>npm install                <span class="comment"># 安装 Hexo 模块</span>
-<span class="variable">$ </span>hexo new <span class="string">"Hello Hexo"</span>        <span class="comment"># 新建一篇博客</span>
-<span class="variable">$ </span>hexo generate                <span class="comment"># 生成静态网站</span>
-<span class="variable">$ </span>hexo server                <span class="comment"># 在本地跑一遍网站 默认 http://    localhost:4000</span>
-<span class="variable">$ </span>hexo deploy                <span class="comment"># 开始部署</span>
-</code></pre><h3 id="更新博客">更新博客</h3><pre><code><span class="variable">$ </span>hexo new <span class="string">"title"</span>        <span class="comment"># 新建博客</span>
-<span class="variable">$ </span>hexo g                <span class="comment"># 生成静态网站</span>
-<span class="variable">$ </span>hexo s                <span class="comment"># 在本地预览网站效果</span>
-<span class="variable">$ </span>hexo d                <span class="comment"># 开始部署</span>
-</code></pre>
+        <h1 id="Hexo简介">Hexo简介</h1><p><a href="https://github.com/hexojs/hexo">Hexo</a>是一款基于Node.js的静态博客框架。目前在GitHub上已有7285 star 和 1207 fork.Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
       
     </div>
     
@@ -658,6 +469,10 @@
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/11/19/test-1/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
