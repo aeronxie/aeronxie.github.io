@@ -3,19 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Python爬虫小程序 | Aeron_Xie</title>
+  <title>Associative机制 | Aeron_Xie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天写一个特别简单的爬虫小程序，这个小程序可以爬一些网络上的图片">
+  <meta name="description" content="什么是Associative？Objective-C有两个扩展机制：category和associative。我们可以通过category来扩展方法，但是它有个很大的局限性，不能扩展属性。于是，就有了专门用来扩展属性的机制：associative。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python爬虫小程序">
-<meta property="og:url" content="http://yoursite.com/2015/11/21/python爬虫小程序/index.html">
+<meta property="og:title" content="Associative机制">
+<meta property="og:url" content="http://yoursite.com/2015/12/06/iOS中（objc-setAssociatedObject）关联对象的简单实用/index.html">
 <meta property="og:site_name" content="Aeron_Xie">
-<meta property="og:description" content="今天写一个特别简单的爬虫小程序，这个小程序可以爬一些网络上的图片">
-<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/屏幕快照%202015-11-21%20下午7.42.13.png">
-<meta property="og:updated_time" content="2015-11-22T08:12:45.000Z">
+<meta property="og:description" content="什么是Associative？Objective-C有两个扩展机制：category和associative。我们可以通过category来扩展方法，但是它有个很大的局限性，不能扩展属性。于是，就有了专门用来扩展属性的机制：associative。">
+<meta property="og:updated_time" content="2015-12-06T06:14:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python爬虫小程序">
-<meta name="twitter:description" content="今天写一个特别简单的爬虫小程序，这个小程序可以爬一些网络上的图片">
+<meta name="twitter:title" content="Associative机制">
+<meta name="twitter:description" content="什么是Associative？Objective-C有两个扩展机制：category和associative。我们可以通过category来扩展方法，但是它有个很大的局限性，不能扩展属性。于是，就有了专门用来扩展属性的机制：associative。">
   
     <link rel="alternative" href="/atom.xml" title="Aeron_Xie" type="application/atom+xml">
   
@@ -200,11 +199,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-python爬虫小程序" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-iOS中（objc-setAssociatedObject）关联对象的简单实用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/11/21/python爬虫小程序/" class="article-date">
-  	<time datetime="2015-11-21T11:45:06.000Z" itemprop="datePublished">2015-11-21</time>
+      <a href="/2015/12/06/iOS中（objc-setAssociatedObject）关联对象的简单实用/" class="article-date">
+  	<time datetime="2015-12-06T05:48:13.000Z" itemprop="datePublished">2015-12-06</time>
 </a>
     </div>
   
@@ -217,7 +216,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Python爬虫小程序
+      Associative机制
     </h1>
   
 
@@ -226,7 +225,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/runtime/">runtime</a></li></ul>
 	</div>
 
         
@@ -237,31 +236,81 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="今天写一个特别简单的爬虫小程序，这个小程序可以爬一些网络上的图片">今天写一个特别简单的爬虫小程序，这个小程序可以爬一些网络上的图片</h3><a id="more"></a>  
-<pre><code><span class="keyword">import</span> urllib
- <span class="keyword">import</span> re
+        <h2 id="什么是Associative？">什么是Associative？</h2><p>Objective-C有两个扩展机制：category和associative。我们可以通过category来扩展方法，但是它有个很大的局限性，不能扩展属性。于是，就有了专门用来扩展属性的机制：associative。<br><a id="more"></a></p>
+<h2 id="使用方法">使用方法</h2><p>在iOS开发过程中，category比较常见，而associative就用的比较少。associative的主要原理，就是把两个对象相互关联起来，使得其中的一个对象作为另外一个对象的一部分。<br>使用associative，我们可以不用修改类的定义而为其对象增加存储空间。这在我们无法访问到类的源码的时候或者是考虑到二进制兼容性的时候是非常有用。<br>associative是基于关键字的。因此，我们可以为任何对象增加任意多的associative，每个都使用不同的关键字即可。associative是可以保证被关联的对象在关联对象的整个生命周期都是可用的。</p>
+<p> associative机制提供了三个方法：</p>
+<pre><code> <span class="comment">//设置关联</span>
+ OBJC_EXPORT <span class="keyword">void</span> objc_setAssociatedObject(<span class="keyword">id</span> object, <span class="keyword">const</span> <span class="keyword">void</span> *key, <span class="keyword">id</span> value, objc_AssociationPolicy policy)
 
-   <span class="comment">#读取网页内容</span>
-    <span class="function"><span class="keyword">def</span> <span class="title">getHtml</span><span class="params">(url)</span>:</span>
-        <span class="keyword">return</span> urllib.urlopen(url).read()
+ <span class="comment">//获取关联对象</span>
+OBJC_EXPORT <span class="keyword">id</span> objc_getAssociatedObject(<span class="keyword">id</span> object, <span class="keyword">const</span> <span class="keyword">void</span> *key)
 
-    <span class="comment">#获取图片</span>
-    <span class="function"><span class="keyword">def</span> <span class="title">getImg</span><span class="params">(html)</span>:</span>
-      reg = <span class="string">r'src="(.+?\.jpg)" pic_ext'</span>
-       imgre = re.compile(reg)
-       imagelist = re.findall(imgre,html)
-       x= <span class="number">0</span>
-       <span class="keyword">for</span> imgurl <span class="keyword">in</span> imagelist:
-       urllib.urlretrieve(imgurl,<span class="string">'%s.jpg'</span> % x)
-       x+=<span class="number">1</span>
-  <span class="comment">#图片地址</span>
-   print(imgurl)
+ <span class="comment">//移除所有关联</span>
+OBJC_EXPORT <span class="keyword">void</span> objc_removeAssociatedObjects(<span class="keyword">id</span> object)
+</code></pre><h3 id="创建associative">创建associative</h3><p>创建associative使用的是：<code>objc_setAssociatedObject(id object, const void *key, id value, objc_AssociationPolicy policy)</code>。它把一个对象与另外一个对象进行关联。</p>
+<p>该函数需要四个参数：</p>
+<ol>
+<li>被关联的对象，下面举的例子中关联到了UIAlertView</li>
+<li>要关联的对象的键值，一般设置成静态的，用于获取关联对象的值</li>
+<li>要关联的对象的值，从接口中可以看到接收的id类型，所以能关联任何对象</li>
+<li><p>关联时采用的策略，有assign，retain，copy等协议，具体可以参考官方文档关键字是一个void类型的指针。每一个关联的关键字必须是唯一的。通常都是会采用静态变量来作为关键字。<br>它的枚举包括：</p>
+<pre><code>OBJC_ASSOCIATION_ASSIGN = <span class="number">0</span>,
+OBJC_ASSOCIATION_RETAIN_NONATOMIC = <span class="number">1</span>,
+OBJC_ASSOCIATION_COPY_NONATOMIC = <span class="number">3</span>,
+OBJC_ASSOCIATION_RETAIN = <span class="number">01401</span>,
+OBJC_ASSOCIATION_COPY = <span class="number">01403</span>
+</code></pre><p> 关联策略表明了相关的对象是通过赋值，保留引用还是复制的方式进行关联的；还有这种关联是原子的还是非原子的。这里的关联策略和声明属性时的很类似。这种关联策略是通过使用预先定义好的常量来表示的。</p>
+</li>
+</ol>
+<blockquote>
+<p>下面就以UIAlertView为例子，在点击Button时，弹出AlertView，点击”好的”按钮，就会获取到Button的名称</p>
+</blockquote>
+<p>首先要使用<code>objc_setAssociatedObject</code>必须导入<code>#import &lt;objc/runtime.h&gt;</code><br>创建静态关键字 <code>static const char associatedButtonkey</code></p>
+<ul>
+<li>通过objc_setAssociatedObject这个函数，把alertView和sender关联起来</li>
+</ul>
+<p><code>objc_setAssociatedObject(alertView, &amp;associatedButtonkey, sender,OBJC_ASSOCIATION_RETAIN_NONATOMIC);</code></p>
+<ul>
+<li>通过 objc_getAssociatedObject获取关联对象</li>
+</ul>
+<p><code>objc_getAssociatedObject(alertView, &amp;associatedButtonkey);</code></p>
+<p>下面就直接上代码：</p>
+<pre><code><span class="preprocessor">#import <span class="title">&lt;objc/runtime.h&gt;</span></span>
 
-   html = getHtml(<span class="string">"http://www.baidu.com"</span>)
+<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">char</span> associatedButtonkey;
 
-   getImg(html)
-</code></pre><h3 id="最后我们能看到下载的图片">最后我们能看到下载的图片</h3><p><img src="http://7xoijj.com1.z0.glb.clouddn.com/屏幕快照%202015-11-21%20下午7.42.13.png" alt="">         </p>
+<span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span>
 
+<span class="keyword">@end</span>
+
+<span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span>
+
+- (<span class="keyword">IBAction</span>)btnClick:(<span class="keyword">id</span>)sender {
+
+
+    <span class="built_in">UIAlertController</span> *alertView = [<span class="built_in">UIAlertController</span> alertControllerWithTitle:<span class="string">@"提示"</span> message:<span class="string">@"我要把按钮的文字传过来"</span> preferredStyle:<span class="built_in">UIAlertControllerStyleAlert</span>];
+
+    <span class="built_in">UIAlertAction</span> *cancelAction = [<span class="built_in">UIAlertAction</span> actionWithTitle:<span class="string">@"取消"</span> style:<span class="built_in">UIAlertActionStyleCancel</span> handler:<span class="literal">nil</span>];
+
+    <span class="built_in">UIAlertAction</span> *okAction = [<span class="built_in">UIAlertAction</span> actionWithTitle:<span class="string">@"好的"</span> style:<span class="built_in">UIAlertActionStyleDefault</span> handler:^(<span class="built_in">UIAlertAction</span> * _Nonnull action) {
+
+    <span class="comment">//通过 objc_getAssociatedObject获取关联对象</span>
+
+    <span class="built_in">UIButton</span> *sender = objc_getAssociatedObject(alertView, &amp;associatedButtonkey);
+
+    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,sender<span class="variable">.titleLabel</span><span class="variable">.text</span>);
+
+}];
+
+    [alertView addAction:cancelAction];
+    [alertView addAction:okAction];
+
+    [<span class="keyword">self</span> presentViewController:alertView animated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];
+
+    <span class="comment">//通过objc_setAssociatedObject这个函数，把alertView和sender关联起来</span>
+    objc_setAssociatedObject(alertView, &amp;associatedButtonkey, sender,OBJC_ASSO<span class="built_in">CIATION_RETAIN_NONATOMIC</span>);
+}
+</code></pre>
       
     </div>
     
@@ -270,18 +319,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/11/21/iOS代码量统计/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          iOS代码量统计
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/11/19/test-1/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">在 GitHub 上搭建 Hexo 个人博客</div>
+    <a href="/2015/12/05/界面调试工具Reveal的使用与安装/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Reveal的安装与使用</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -310,7 +350,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="python爬虫小程序" data-title="Python爬虫小程序" data-url="http://yoursite.com/2015/11/21/python爬虫小程序/"></div>
+	<div class="ds-thread" data-thread-key="iOS中（objc-setAssociatedObject）关联对象的简单实用" data-title="Associative机制" data-url="http://yoursite.com/2015/12/06/iOS中（objc-setAssociatedObject）关联对象的简单实用/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
