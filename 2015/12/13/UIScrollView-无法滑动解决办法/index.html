@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2015 | Aeron_Xie</title>
+  <title>UIScrollView 无法滑动解决办法 | Aeron_Xie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Aeron_Xie">
-<meta property="og:url" content="http://yoursite.com/archives/2015/page/2/index.html">
+  <meta name="description" content="最近在做项目的时候，用到了Storyboard，往里面拖了一个scrollView，然后在scrollView又加了很多控件，但是一跑起来，就不能滑动了。。。。这是神马情况？ 按正常情况，scrollView不能滑动，要不就是 contentSize 比 scrollView 的 frame 小,要不就是 scrollEnabled 属性没设置成 YES.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UIScrollView 无法滑动解决办法">
+<meta property="og:url" content="http://yoursite.com/2015/12/13/UIScrollView-无法滑动解决办法/index.html">
 <meta property="og:site_name" content="Aeron_Xie">
-<meta property="og:description">
+<meta property="og:description" content="最近在做项目的时候，用到了Storyboard，往里面拖了一个scrollView，然后在scrollView又加了很多控件，但是一跑起来，就不能滑动了。。。。这是神马情况？ 按正常情况，scrollView不能滑动，要不就是 contentSize 比 scrollView 的 frame 小,要不就是 scrollEnabled 属性没设置成 YES.">
+<meta property="og:updated_time" content="2015-12-13T04:19:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Aeron_Xie">
-<meta name="twitter:description">
+<meta name="twitter:title" content="UIScrollView 无法滑动解决办法">
+<meta name="twitter:description" content="最近在做项目的时候，用到了Storyboard，往里面拖了一个scrollView，然后在scrollView又加了很多控件，但是一跑起来，就不能滑动了。。。。这是神马情况？ 按正常情况，scrollView不能滑动，要不就是 contentSize 比 scrollView 的 frame 小,要不就是 scrollEnabled 属性没设置成 YES.">
   
     <link rel="alternative" href="/atom.xml" title="Aeron_Xie" type="application/atom+xml">
   
@@ -198,88 +199,122 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-UIScrollView-无法滑动解决办法" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/11/19/test-1/" class="archive-article-date">
-  	<time datetime="2015-11-19T12:12:05.000Z" itemprop="datePublished">Nov 19</time>
+    <div class="article-meta">
+      <a href="/2015/12/13/UIScrollView-无法滑动解决办法/" class="article-date">
+  	<time datetime="2015-12-13T04:18:12.000Z" itemprop="datePublished">2015-12-13</time>
 </a>
-        </div>
-    	 
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/11/19/test-1/">在 GitHub 上搭建 Hexo 个人博客</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      UIScrollView 无法滑动解决办法
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
 	</div>
 
-          
+        
 
-        </div>
         <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+      </div>
+      
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/11/19/hello/" class="archive-article-date">
-  	<time datetime="2015-11-19T10:29:24.000Z" itemprop="datePublished">Nov 19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/11/19/hello/">第一次搭建hexo博客</a>
-    </h1>
-  
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在做项目的时候，用到了Storyboard，往里面拖了一个scrollView，然后在scrollView又加了很多控件，但是一跑起来，就不能滑动了。。。。这是神马情况？ 按正常情况，scrollView不能滑动，要不就是 <code>contentSize</code> 比 scrollView 的 <code>frame</code> 小,要不就是 <code>scrollEnabled</code> 属性没设置成 <code>YES</code>.<br><a id="more"></a><br>可是这两个我都设置了，没有问题啊。 后面发现应该是约束的问题，于是就把 <code>AutoLayout</code> 给去掉了，然后运行发现可以滑动了，但是我由于使用Storyboard，里面加了很多约束，去掉就得重新修改，这太麻烦了。 </p>
+<p>打印了一下生命周期函数，发现执行顺序是这样的</p>
+<pre><code><span class="number">2015</span>-<span class="number">12</span>-<span class="number">13</span> <span class="number">12</span>:<span class="number">04</span>:<span class="number">52.053</span> Test[<span class="number">33645</span>:<span class="number">13750163</span>] viewDidLoad
+<span class="number">2015</span>-<span class="number">12</span>-<span class="number">13</span> <span class="number">12</span>:<span class="number">04</span>:<span class="number">52.053</span> Test[<span class="number">33645</span>:<span class="number">13750163</span>] viewWillAppear
+<span class="number">2015</span>-<span class="number">12</span>-<span class="number">13</span> <span class="number">12</span>:<span class="number">04</span>:<span class="number">52.100</span> Test[<span class="number">33645</span>:<span class="number">13750163</span>] viewWillLayoutSubviews
+<span class="number">2015</span>-<span class="number">12</span>-<span class="number">13</span> <span class="number">12</span>:<span class="number">04</span>:<span class="number">52.101</span> Test[<span class="number">33645</span>:<span class="number">13750163</span>] viewDidLayoutSubviews
+<span class="number">2015</span>-<span class="number">12</span>-<span class="number">13</span> <span class="number">12</span>:<span class="number">04</span>:<span class="number">52.106</span> Test[<span class="number">33645</span>:<span class="number">13750163</span>] viewDidAppear
+</code></pre><blockquote>
+<p>因为在Autolayout下，会在viewDidAppear之前根据subview的constraint重新计算scrollview的contentsize。 这就是为什么，在viewDidLoad里面手动设置了contentsize没用。因为在后面，会再重新计算一次，前面手动设置的值会被覆盖掉。 也就是说只要在 <code>viewWillAppear</code> 之后设置 <code>contentSize</code>是有效的。</p>
+</blockquote>
+<p>这算是找到答案了，解决办法可以在 <code>viewDidAppear:</code> 方法中重新设置 <code>contentSize</code></p>
+<pre><code>-(<span class="keyword">void</span>)viewDidAppear:(<span class="built_in">BOOL</span>)animated {
+    [<span class="keyword">super</span> viewDidAppear:animated];
+    <span class="keyword">self</span><span class="variable">.scrollView</span><span class="variable">.contentSize</span> = <span class="built_in">CGSizeMake</span>(<span class="number">0</span>, <span class="number">1000</span>);
+}
+</code></pre><p>也可以添加 <code>viewDidLayoutSubviews</code> 这个方法</p>
+<pre><code>-(<span class="keyword">void</span>)viewDidLayoutSubviews {
+    self.scrollView.contentSize = CGSizeMake(<span class="number">0</span>,<span class="number">1000</span>);
+}
+</code></pre><p>如果这样还不行的话，就只能手写代码了~~~</p>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/12/07/动态修改NavigationBar的颜色/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">动态修改NavigationBar的颜色</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2015/">&laquo; Prev</a><a class="page-number" href="/archives/2015/">1</a><span class="page-number current">2</span>
-    </nav>
-  
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="UIScrollView-无法滑动解决办法" data-title="UIScrollView 无法滑动解决办法" data-url="http://yoursite.com/2015/12/13/UIScrollView-无法滑动解决办法/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"aeronxie"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 </div>
       <footer id="footer">
@@ -305,8 +340,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false
