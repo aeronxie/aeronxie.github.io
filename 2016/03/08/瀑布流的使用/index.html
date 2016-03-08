@@ -3,17 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: Objective-C | Aeron_Xie</title>
+  <title>瀑布流的使用 | Aeron_Xie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Aeron_Xie">
-<meta property="og:url" content="http://yoursite.com/tags/Objective-C/index.html">
+  <meta name="description" content="最新研究了下iOS中瀑布流的实现方法，一般瀑布流都采用ScrollView + UITableView，或者是使用UICollectionView实现。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="瀑布流的使用">
+<meta property="og:url" content="http://yoursite.com/2016/03/08/瀑布流的使用/index.html">
 <meta property="og:site_name" content="Aeron_Xie">
-<meta property="og:description">
+<meta property="og:description" content="最新研究了下iOS中瀑布流的实现方法，一般瀑布流都采用ScrollView + UITableView，或者是使用UICollectionView实现。">
+<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/pbl1.png">
+<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/pbl2.png">
+<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/water.gif">
+<meta property="og:updated_time" content="2016-03-08T02:30:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Aeron_Xie">
-<meta name="twitter:description">
+<meta name="twitter:title" content="瀑布流的使用">
+<meta name="twitter:description" content="最新研究了下iOS中瀑布流的实现方法，一般瀑布流都采用ScrollView + UITableView，或者是使用UICollectionView实现。">
   
     <link rel="alternative" href="/atom.xml" title="Aeron_Xie" type="application/atom+xml">
   
@@ -200,156 +204,165 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-瀑布流的使用" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/03/08/链式编程/" class="archive-article-date">
-  	<time datetime="2016-03-08T02:26:38.000Z" itemprop="datePublished">Mar 8</time>
+    <div class="article-meta">
+      <a href="/2016/03/08/瀑布流的使用/" class="article-date">
+  	<time datetime="2016-03-08T02:23:22.000Z" itemprop="datePublished">2016-03-08</time>
 </a>
-        </div>
-    	 
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/08/链式编程/">链式编程</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      瀑布流的使用
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
 	</div>
 
-          
+        
 
-        </div>
         <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/03/08/Swizzling-黑魔法/" class="archive-article-date">
-  	<time datetime="2016-03-08T02:25:48.000Z" itemprop="datePublished">Mar 8</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/08/Swizzling-黑魔法/">Swizzling 黑魔法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/runtime/">runtime</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/03/08/瀑布流的使用/" class="archive-article-date">
-  	<time datetime="2016-03-08T02:23:22.000Z" itemprop="datePublished">Mar 8</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/08/瀑布流的使用/">瀑布流的使用</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
+      </div>
       
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/12/13/UIScrollView-无法滑动解决办法/" class="archive-article-date">
-  	<time datetime="2015-12-13T04:18:12.000Z" itemprop="datePublished">Dec 13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/13/UIScrollView-无法滑动解决办法/">UIScrollView 无法滑动解决办法</a>
-    </h1>
-  
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>最新研究了下iOS中瀑布流的实现方法，一般瀑布流都采用ScrollView + UITableView，或者是使用UICollectionView实现。<br><a id="more"></a></p>
+<h3 id="ScrollView_+_UITableView">ScrollView + UITableView</h3></blockquote>
+<p>使用这种方法实现瀑布流的话，首先底层应该是一个 <code>UIScrollView</code> ，然后再 <code>UIScrollView</code> 上面添加 <code>UITableView</code> ，但是这个方法有很多不太好的地方，首先这两个控件都可以单独滚动，所以需要把 <code>UITableView</code> 的滚动禁止了，如果有很多列的话就需要很多个 <code>UITableView</code>，而且还需要单独的管理每一列的东西，下标也不好计算</p>
+<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/pbl1.png" alt="pbl1.png"></p>
+<h3 id="UICollectionView">UICollectionView</h3><p>使用这个方法，对比以上方法，<code>UICollectionView</code> 系统帮解决了cell的重用问题，而且不需要分列管理，在计算的时候也比较方便，所以大多数的瀑布流都使用 <code>UICollectionView</code></p>
+<p><strong>实现思路</strong></p>
+<p>我们需要把每一个不同高度的cell填充到里面去，而且要保持长短的平均，所以我们需要每次都把cell放到所有列中最短的那一列后边拼接，这样就可以实现长短不一了，然后再加上行跟列的间距以及边缘宽度，就可以了。</p>
+<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/pbl2.png" alt="pbl1.png"></p>
+<h2 id="实现">实现</h2><p>首先我们需要写一个自定义布局，并且继承于 <code>UICollectionViewLayout</code></p>
+<p>我们需要实现四个方法：</p>
+<ul>
+<li><code>- (void)prepareLayout</code></li>
+<li><code>- (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect</code></li>
+<li><code>- (UICollectionViewLayoutAttributes )layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath</code></li>
+<li><code>- (CGSize)collectionViewContentSize</code></li>
+</ul>
+<p>这四个方法作用分别是</p>
+<pre><code>/<span class="keyword">*</span><span class="keyword">*</span>
+<span class="keyword">*</span>  布局准备方法 初始化会被调用一次
+ <span class="keyword">*</span>  当collectionView的布局发生变化时 会被调用
+ <span class="keyword">*</span>  通常是做布局的准备工作 itemSize.....
+ <span class="keyword">*</span>/
+- (void)prepareLayout {
+    [super prepareLayout];
+    ...
+}
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
+/<span class="keyword">*</span><span class="keyword">*</span>
+  <span class="keyword">*</span> 所有cell的布局属性
+  <span class="keyword">*</span>/
+- (NSArray <span class="keyword">*</span>)layoutAttributesForElementsInRect:(CGRect)rect {
+    ...
+}
 
-          
+/<span class="keyword">*</span><span class="keyword">*</span>
+  <span class="keyword">*</span> 返回indexPath位置cell对应的布局属性
+  <span class="keyword">*</span>/
+- (UICollectionViewLayoutAttributes <span class="keyword">*</span>）layoutAttributesForItemAtIndexPath:(NSIndexPath <span class="keyword">*</span>)indexPath {
+    ...
+}
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+/<span class="keyword">*</span><span class="keyword">*</span>
+  <span class="keyword">*</span>  内容大小
+  <span class="keyword">*</span>
+  <span class="keyword">*</span>  <span class="comment">@return 大小</span>
+  <span class="keyword">*</span>/
+- (CGSize)collectionViewContentSize {
+    ...    
+}
+</code></pre><p>实现这个四个方法后，一个布局就写好了</p>
+<p>最后的效果~</p>
+<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/water.gif" alt="pbl1.png"></p>
+<p><a href="https://github.com/aeronxie/Waterflow/tree/master" target="_blank" rel="external">Demo代码在github上的地址~~</a></p>
+
+      
+    </div>
+    
   </div>
-</article>
   
-  
-    </div></section>
-  
-
     
+<nav id="article-nav">
+  
+    <a href="/2016/03/08/Swizzling-黑魔法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Swizzling 黑魔法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/13/UIScrollView-无法滑动解决办法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">UIScrollView 无法滑动解决办法</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="瀑布流的使用" data-title="瀑布流的使用" data-url="http://yoursite.com/2016/03/08/瀑布流的使用/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"aeronxie"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 </div>
       <footer id="footer">
@@ -375,9 +388,9 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false
 	}
