@@ -3,18 +3,25 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Associative机制 | Aeron_Xie</title>
+  <title>UIDynamic 详细用法 | Aeron_Xie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="什么是Associative？Objective-C有两个扩展机制：category和associative。我们可以通过category来扩展方法，但是它有个很大的局限性，不能扩展属性。于是，就有了专门用来扩展属性的机制：associative。">
+  <meta name="description" content="UIDynamic 详细用法
+什么是UIDynamic?
+UIDynamic是从iOS 7开始引入的一种新技术，隶属于UIKit框架可以认为是一种物理引擎，能模拟和仿真现实生活中的物理现象重力、弹性碰撞等现象">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Associative机制">
-<meta property="og:url" content="http://yoursite.com/2015/12/06/iOS中（objc-setAssociatedObject）关联对象的简单实用/index.html">
+<meta property="og:title" content="UIDynamic 详细用法">
+<meta property="og:url" content="http://yoursite.com/2016/03/09/UIDynamic-详细用法/index.html">
 <meta property="og:site_name" content="Aeron_Xie">
-<meta property="og:description" content="什么是Associative？Objective-C有两个扩展机制：category和associative。我们可以通过category来扩展方法，但是它有个很大的局限性，不能扩展属性。于是，就有了专门用来扩展属性的机制：associative。">
-<meta property="og:updated_time" content="2015-12-06T06:17:29.000Z">
+<meta property="og:description" content="UIDynamic 详细用法
+什么是UIDynamic?
+UIDynamic是从iOS 7开始引入的一种新技术，隶属于UIKit框架可以认为是一种物理引擎，能模拟和仿真现实生活中的物理现象重力、弹性碰撞等现象">
+<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/animator.gif">
+<meta property="og:updated_time" content="2016-03-09T11:53:45.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Associative机制">
-<meta name="twitter:description" content="什么是Associative？Objective-C有两个扩展机制：category和associative。我们可以通过category来扩展方法，但是它有个很大的局限性，不能扩展属性。于是，就有了专门用来扩展属性的机制：associative。">
+<meta name="twitter:title" content="UIDynamic 详细用法">
+<meta name="twitter:description" content="UIDynamic 详细用法
+什么是UIDynamic?
+UIDynamic是从iOS 7开始引入的一种新技术，隶属于UIKit框架可以认为是一种物理引擎，能模拟和仿真现实生活中的物理现象重力、弹性碰撞等现象">
   
     <link rel="alternative" href="/atom.xml" title="Aeron_Xie" type="application/atom+xml">
   
@@ -201,11 +208,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-iOS中（objc-setAssociatedObject）关联对象的简单实用" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-UIDynamic-详细用法" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/06/iOS中（objc-setAssociatedObject）关联对象的简单实用/" class="article-date">
-  	<time datetime="2015-12-06T05:48:13.000Z" itemprop="datePublished">2015-12-06</time>
+      <a href="/2016/03/09/UIDynamic-详细用法/" class="article-date">
+  	<time datetime="2016-03-09T11:53:16.000Z" itemprop="datePublished">2016-03-09</time>
 </a>
     </div>
   
@@ -218,7 +225,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Associative机制
+      UIDynamic 详细用法
     </h1>
   
 
@@ -227,7 +234,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/runtime/">runtime</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
 	</div>
 
         
@@ -238,81 +245,102 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="什么是Associative？">什么是Associative？</h2><p>Objective-C有两个扩展机制：category和associative。我们可以通过category来扩展方法，但是它有个很大的局限性，不能扩展属性。于是，就有了专门用来扩展属性的机制：associative。<br><a id="more"></a></p>
-<h2 id="使用方法">使用方法</h2><p>在iOS开发过程中，category比较常见，而associative就用的比较少。associative的主要原理，就是把两个对象相互关联起来，使得其中的一个对象作为另外一个对象的一部分。<br>使用associative，我们可以不用修改类的定义而为其对象增加存储空间。这在我们无法访问到类的源码的时候或者是考虑到二进制兼容性的时候是非常有用。<br>associative是基于关键字的。因此，我们可以为任何对象增加任意多的associative，每个都使用不同的关键字即可。associative是可以保证被关联的对象在关联对象的整个生命周期都是可用的。</p>
-<p> associative机制提供了三个方法：</p>
-<pre><code> <span class="comment">//设置关联</span>
- OBJC_EXPORT <span class="keyword">void</span> objc_setAssociatedObject(<span class="keyword">id</span> object, <span class="keyword">const</span> <span class="keyword">void</span> *key, <span class="keyword">id</span> value, objc_AssociationPolicy policy)
-
- <span class="comment">//获取关联对象</span>
-OBJC_EXPORT <span class="keyword">id</span> objc_getAssociatedObject(<span class="keyword">id</span> object, <span class="keyword">const</span> <span class="keyword">void</span> *key)
-
- <span class="comment">//移除所有关联</span>
-OBJC_EXPORT <span class="keyword">void</span> objc_removeAssociatedObjects(<span class="keyword">id</span> object)
-</code></pre><h3 id="创建associative">创建associative</h3><p>创建associative使用的是：<code>objc_setAssociatedObject(id object, const void *key, id value, objc_AssociationPolicy policy)</code>。它把一个对象与另外一个对象进行关联。</p>
-<p>该函数需要四个参数：</p>
-<ol>
-<li>被关联的对象，下面举的例子中关联到了UIAlertView</li>
-<li>要关联的对象的键值，一般设置成静态的，用于获取关联对象的值</li>
-<li>要关联的对象的值，从接口中可以看到接收的id类型，所以能关联任何对象</li>
-<li><p>关联时采用的策略，有assign，retain，copy等协议，具体可以参考官方文档关键字是一个void类型的指针。每一个关联的关键字必须是唯一的。通常都是会采用静态变量来作为关键字。<br>它的枚举包括：</p>
-<pre><code>OBJC_ASSOCIATION_ASSIGN = <span class="number">0</span>,
-OBJC_ASSOCIATION_RETAIN_NONATOMIC = <span class="number">1</span>,
-OBJC_ASSOCIATION_COPY_NONATOMIC = <span class="number">3</span>,
-OBJC_ASSOCIATION_RETAIN = <span class="number">01401</span>,
-OBJC_ASSOCIATION_COPY = <span class="number">01403</span>
-</code></pre><p> 关联策略表明了相关的对象是通过赋值，保留引用还是复制的方式进行关联的；还有这种关联是原子的还是非原子的。这里的关联策略和声明属性时的很类似。这种关联策略是通过使用预先定义好的常量来表示的。</p>
-</li>
-</ol>
-<blockquote>
-<p>下面就以UIAlertView为例子，在点击Button时，弹出AlertView，点击”好的”按钮，就会获取到Button的名称</p>
+        <h1 id="UIDynamic_详细用法">UIDynamic 详细用法</h1><blockquote>
+<p>什么是UIDynamic?</p>
+<p>UIDynamic是从iOS 7开始引入的一种新技术，隶属于UIKit框架<br>可以认为是一种物理引擎，能模拟和仿真现实生活中的物理现象<br>重力、弹性碰撞等现象</p>
 </blockquote>
-<p>首先要使用<code>objc_setAssociatedObject</code>必须导入<code>#import &lt;objc/runtime.h&gt;</code><br>创建静态关键字 <code>static const char associatedButtonkey</code></p>
+<a id="more"></a>
+<p>###UIDynamic使用步骤</p>
 <ul>
-<li>通过objc_setAssociatedObject这个函数，把alertView和sender关联起来</li>
+<li>创建一个物理仿真器（顺便设置仿真范围）</li>
+<li>创建相应的物理仿真行为（顺便添加物理仿真元素）</li>
+<li>将物理仿真行为添加到物理仿真器中，开始仿真</li>
 </ul>
-<p><code>objc_setAssociatedObject(alertView, &amp;associatedButtonkey, sender,OBJC_ASSOCIATION_RETAIN_NONATOMIC);</code></p>
+<p>###物理仿真元素<br>不是任何对象都能做物理仿真元素，不是任何对象都能进行物理仿真</p>
+<p><strong>哪些对象才能做物理仿真元素？</strong></p>
+<p>任何遵守了UIDynamicItem协议的对象<br>UIView默认已经遵守了UIDynamicItem协议，因此任何UI控件都能做物理仿真<br>UICollectionViewLayoutAttributes类默认也遵守UIDynamicItem协议</p>
+<p>###物理仿真行为</p>
 <ul>
-<li>通过 objc_getAssociatedObject获取关联对象</li>
+<li>UIDynamic提供了以下几种物理仿真行为</li>
+<li>UIGravityBehavior：重力行为</li>
+<li>UICollisionBehavior：碰撞行为</li>
+<li>UISnapBehavior：捕捉行为</li>
+<li>UIPushBehavior：推动行为</li>
+<li>UIAttachmentBehavior：附着行为</li>
+<li>UIDynamicItemBehavior：动力元素行为</li>
 </ul>
-<p><code>objc_getAssociatedObject(alertView, &amp;associatedButtonkey);</code></p>
-<p>下面就直接上代码：</p>
-<pre><code><span class="preprocessor">#import <span class="title">&lt;objc/runtime.h&gt;</span></span>
-
-<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">char</span> associatedButtonkey;
+<p>###物理仿真器<br>它可以让物理仿真元素执行物理仿真行为，它是UIDynamicAnimator类型的对象<br>UIDynamicAnimator的初始化</p>
+<p><code>- (instancetype)initWithReferenceView:(UIView *)view;</code></p>
+<p>view参数：是一个参照视图，表示物理仿真的范围</p>
+<p>####UIDynamicAnimator的常见方法<br>//添加1个物理仿真行为</p>
+<p><code>- (void)addBehavior:(UIDynamicBehavior *)behavior;</code></p>
+<p>//移除1个物理仿真行为</p>
+<p><code>- (void)removeBehavior:(UIDynamicBehavior *)behavior;</code></p>
+<p>//移除之前添加过的所有物理仿真行为</p>
+<p><code>- (void)removeAllBehaviors;</code></p>
+<p>####UIDynamicAnimator的常见属性<br>//参照视图</p>
+<p><code>@property (nonatomic, readonly) UIView* referenceView;</code></p>
+<p>//添加到物理仿真器中的所有物理仿真行为</p>
+<p><code>@property (nonatomic, readonly, copy) NSArray* behaviors;</code></p>
+<p>//是否正在进行物理仿真<br><code>@property (nonatomic, readonly, getter = isRunning) BOOL running;</code></p>
+<p>//代理对象（能监听物理仿真器的仿真过程，比如开始和结束）<br><code>@property (nonatomic, assign) id &lt;UIDynamicAnimatorDelegate&gt; delegate;</code></p>
+<p>###直接上代码</p>
+<pre><code><span class="preprocessor">#import <span class="title">"ViewController.h"</span></span>
 
 <span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span>
-
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>) <span class="built_in">UIDynamicAnimator</span> *animator;
+<span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="keyword">IBOutlet</span> <span class="built_in">UISegmentedControl</span> *segmented;
+<span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="keyword">IBOutlet</span> <span class="built_in">UIView</span> *blueView;
+<span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="keyword">IBOutlet</span> <span class="built_in">UIView</span> *redView;
+<span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="keyword">IBOutlet</span> <span class="built_in">UIView</span> *orangeView;
 <span class="keyword">@end</span>
 
 <span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span>
 
-- (<span class="keyword">IBAction</span>)btnClick:(<span class="keyword">id</span>)sender {
+-(<span class="keyword">void</span>)viewDidLoad {
+    [<span class="keyword">super</span> viewDidLoad];
+    <span class="keyword">self</span><span class="variable">.blueView</span><span class="variable">.transform</span> =     <span class="built_in">CGAffineTransformMakeRotation</span>(M_PI_4);
+    <span class="keyword">self</span><span class="variable">.segmented</span><span class="variable">.transform</span> = <span class="built_in">CGAffineTransformMakeRotation</span>(-    M_PI / <span class="number">8</span>);
+</code></pre><p>}</p>
+<pre><code>-(<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:    (<span class="built_in">UIEvent</span> *)event {
 
+    <span class="comment">//创建重力行为</span>
+    <span class="built_in">UIGravityBehavior</span> *gravityBehavior = [[<span class="built_in">UIGravityBehavior</span> alloc]init];
+    [gravityBehavior addItem:<span class="keyword">self</span><span class="variable">.blueView</span>];
+    [gravityBehavior addItem:<span class="keyword">self</span><span class="variable">.orangeView</span>];
+    <span class="comment">//加速度</span>
+    gravityBehavior<span class="variable">.magnitude</span> = <span class="number">3</span>;
+    <span class="comment">//创建碰撞行为</span>
+    <span class="built_in">UICollisionBehavior</span> *collisionBehavior = [[<span class="built_in">UICollisionBehavior</span> alloc]init];
+    <span class="comment">//碰撞类型为元素和边界</span>
+    collisionBehavior<span class="variable">.collisionMode</span> = <span class="built_in">UICollisionBehaviorModeEverything</span>;
 
-    <span class="built_in">UIAlertController</span> *alertView = [<span class="built_in">UIAlertController</span> alertControllerWithTitle:<span class="string">@"提示"</span> message:<span class="string">@"我要把按钮的文字传过来"</span> preferredStyle:<span class="built_in">UIAlertControllerStyleAlert</span>];
+    <span class="built_in">CGFloat</span> Y = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span> - <span class="built_in">CGRectGetHeight</span>(<span class="keyword">self</span><span class="variable">.redView</span><span class="variable">.frame</span>);
+    <span class="built_in">CGFloat</span> X = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>;
+    <span class="built_in">CGFloat</span> height = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>;
 
-    <span class="built_in">UIAlertAction</span> *cancelAction = [<span class="built_in">UIAlertAction</span> actionWithTitle:<span class="string">@"取消"</span> style:<span class="built_in">UIAlertActionStyleCancel</span> handler:<span class="literal">nil</span>];
+    <span class="comment">//设置红色的View为底边界,左边框跟右边框作为边界</span>
+    [collisionBehavior addBoundaryWithIdentifier:<span class="string">@"collision1"</span> fromPoint:<span class="built_in">CGPointMake</span>(<span class="number">0</span>,Y) toPoint:<span class="built_in">CGPointMake</span>(X, Y)];
+    [collisionBehavior addBoundaryWithIdentifier:<span class="string">@"collision2"</span> fromPoint:<span class="built_in">CGPointMake</span>(<span class="number">0</span>, <span class="number">0</span>) toPoint:<span class="built_in">CGPointMake</span>(<span class="number">0</span>, height)];
+    [collisionBehavior addBoundaryWithIdentifier:<span class="string">@"collision3"</span> fromPoint:<span class="built_in">CGPointMake</span>(X,<span class="number">0</span>) toPoint:<span class="built_in">CGPointMake</span>(X, height)];
 
-    <span class="built_in">UIAlertAction</span> *okAction = [<span class="built_in">UIAlertAction</span> actionWithTitle:<span class="string">@"好的"</span> style:<span class="built_in">UIAlertActionStyleDefault</span> handler:^(<span class="built_in">UIAlertAction</span> * _Nonnull action) {
-
-    <span class="comment">//通过 objc_getAssociatedObject获取关联对象</span>
-
-    <span class="built_in">UIButton</span> *sender = objc_getAssociatedObject(alertView, &amp;associatedButtonkey);
-
-    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,sender<span class="variable">.titleLabel</span><span class="variable">.text</span>);
-
-}];
-
-    [alertView addAction:cancelAction];
-    [alertView addAction:okAction];
-
-    [<span class="keyword">self</span> presentViewController:alertView animated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];
-
-    <span class="comment">//通过objc_setAssociatedObject这个函数，把alertView和sender关联起来</span>
-    objc_setAssociatedObject(alertView, &amp;associatedButtonkey, sender,OBJC_ASSO<span class="built_in">CIATION_RETAIN_NONATOMIC</span>);
+    [collisionBehavior addItem:<span class="keyword">self</span><span class="variable">.blueView</span>];
+    [collisionBehavior addItem:<span class="keyword">self</span><span class="variable">.segmented</span>];
+    [collisionBehavior addItem:<span class="keyword">self</span><span class="variable">.orangeView</span>];
+    [<span class="keyword">self</span><span class="variable">.animator</span> addBehavior:collisionBehavior];
+    [<span class="keyword">self</span><span class="variable">.animator</span> addBehavior:gravityBehavior];
 }
-</code></pre>
+
+- (<span class="built_in">UIDynamicAnimator</span> *)animator{
+    <span class="keyword">if</span> (_animator == <span class="literal">nil</span>) {
+        _animator = [[<span class="built_in">UIDynamicAnimator</span> alloc]init];
+    }
+    <span class="keyword">return</span> _animator;
+}
+<span class="keyword">@end</span>
+</code></pre><p>###效果</p>
+<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/animator.gif" alt=""></p>
+
       
     </div>
     
@@ -321,18 +349,9 @@ OBJC_ASSOCIATION_COPY = <span class="number">01403</span>
     
 <nav id="article-nav">
   
-    <a href="/2015/12/07/动态修改NavigationBar的颜色/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          动态修改NavigationBar的颜色
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/12/05/界面调试工具Reveal的使用与安装/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Reveal的安装与使用</div>
+    <a href="/2016/03/09/Reactivecocoa-简单用法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Reactivecocoa 简单用法</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -361,7 +380,7 @@ OBJC_ASSOCIATION_COPY = <span class="number">01403</span>
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="iOS中（objc-setAssociatedObject）关联对象的简单实用" data-title="Associative机制" data-url="http://yoursite.com/2015/12/06/iOS中（objc-setAssociatedObject）关联对象的简单实用/"></div>
+	<div class="ds-thread" data-thread-key="UIDynamic-详细用法" data-title="UIDynamic 详细用法" data-url="http://yoursite.com/2016/03/09/UIDynamic-详细用法/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
