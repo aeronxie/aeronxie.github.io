@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CollectionView自定义布局 | Aeron_Xie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CollectionView自定义布局
+平时我们经常看见的相册，卡片式的堆叠效果，瀑布流，单元格移动等，这些都需要用到自定义布局，当然他们是可以滑动的。首先我们想到的是 UIScrollView 那内容如果特别多的话就会影响到性能问题，如果自己写循环利用的话就会特别麻烦，所以们就会用到 UICollectionView，系统自带的只有流布局，如果想要特别好看的效果，我们就必须使用自定义布局。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CollectionView自定义布局">
+<meta property="og:url" content="http://yoursite.com/2016/03/12/CollectionView自定义布局/index.html">
+<meta property="og:site_name" content="Aeron_Xie">
+<meta property="og:description" content="CollectionView自定义布局
+平时我们经常看见的相册，卡片式的堆叠效果，瀑布流，单元格移动等，这些都需要用到自定义布局，当然他们是可以滑动的。首先我们想到的是 UIScrollView 那内容如果特别多的话就会影响到性能问题，如果自己写循环利用的话就会特别麻烦，所以们就会用到 UICollectionView，系统自带的只有流布局，如果想要特别好看的效果，我们就必须使用自定义布局。">
+<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/custom.gif">
+<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/ct05.png">
+<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/ct04.png">
+<meta property="og:updated_time" content="2016-03-12T12:09:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CollectionView自定义布局">
+<meta name="twitter:description" content="CollectionView自定义布局
+平时我们经常看见的相册，卡片式的堆叠效果，瀑布流，单元格移动等，这些都需要用到自定义布局，当然他们是可以滑动的。首先我们想到的是 UIScrollView 那内容如果特别多的话就会影响到性能问题，如果自己写循环利用的话就会特别麻烦，所以们就会用到 UICollectionView，系统自带的只有流布局，如果想要特别好看的效果，我们就必须使用自定义布局。">
+  
+    <link rel="alternative" href="/atom.xml" title="Aeron_Xie" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="img/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://avatars1.githubusercontent.com/u/32269?v=3&amp;s=460" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Aeron_Xie</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/aeronxie" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/1919135421/home?wvr=5" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/xie-fei-75-92" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="https://mail.google.com/mail/#inbox" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/CocoaPods/" style="font-size: 10px;">CocoaPods</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Objective-C/" style="font-size: 16.67px;">Objective-C</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Reactivecocoa/" style="font-size: 10px;">Reactivecocoa</a> <a href="/tags/Reveal/" style="font-size: 10px;">Reveal</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/runtime/" style="font-size: 13.33px;">runtime</a> <a href="/tags/动画/" style="font-size: 10px;">动画</a> <a href="/tags/随笔/" style="font-size: 13.33px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://laichanwai.github.io/">Ivy的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maru-zhang.github.io">maru的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.zhangfei.tk/">张飞的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.jianshu.com/users/b82d2721ba07/latest_articles">叶孤城的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.onevcat.com/">喵神的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://kittenyang.com/">Kitten Yong的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.ibireme.com/">Ibireme的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.sunnyxx.com/">我就叫Sunny的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.devtang.com/">唐巧的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">一个二流大学喜欢iOS开发的一个大学生，喜欢各种新鲜事物，会android \ swift \ python \ java \ C \ javascript \ mysql \ jsp单词的拼写~~~~</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Aeron_Xie</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://avatars1.githubusercontent.com/u/32269?v=3&amp;s=460" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Aeron_Xie</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/aeronxie" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1919135421/home?wvr=5" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/xie-fei-75-92" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="https://mail.google.com/mail/#inbox" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-CollectionView自定义布局" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/12/CollectionView自定义布局/" class="article-date">
+  	<time datetime="2016-03-12T12:06:02.000Z" itemprop="datePublished">2016-03-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CollectionView自定义布局
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动画/">动画</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CollectionView自定义布局">CollectionView自定义布局</h1><blockquote>
+<p>平时我们经常看见的相册，卡片式的堆叠效果，瀑布流，单元格移动等，这些都需要用到自定义布局，当然他们是可以滑动的。首先我们想到的是 <code>UIScrollView</code> 那内容如果特别多的话就会影响到性能问题，如果自己写循环利用的话就会特别麻烦，所以们就会用到 <code>UICollectionView</code>，系统自带的只有流布局，如果想要特别好看的效果，我们就必须使用自定义布局。</p>
+</blockquote>
+<a id="more"></a>
+<p>我们先来看下效果：</p>
+<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/custom.gif" alt=""></p>
+<h2 id="线性布局">线性布局</h2><p><img src="http://7xoijj.com1.z0.glb.clouddn.com/ct05.png" alt=""></p>
+<p>要写线性布局，我们需要先分析下思路，水平滚动我们可以使用 <code>self.scrollDirection = 
+UICollectionViewScrollDirectionHorizontal;</code><br>然后我们怎么让cell的大小随着滑动变化呢？ </p>
+<h3 id="核心就是用cell的中心点减去collectionView最中心点，然后再根据间距的多少来缩放cell"><strong>核心就是用cell的中心点减去collectionView最中心点，然后再根据间距的多少来缩放cell</strong></h3><p>自定义布局需要继承自 <code>UICollectionViewFlowLayout</code> ,然后我们需要实现四个方法</p>
+<ul>
+<li>用来做布局的初始化操作</li>
+</ul>
+<p><code>- (void)prepareLayout</code></p>
+<ul>
+<li>返回的数组里面存放着rect范围内所有元素的布局属性</li>
+<li>这个方法的返回值决定了rect范围内所有元素的排布（frame）</li>
+<li>一个cell对应一个UICollectionViewLayoutAttributes对象</li>
+</ul>
+<p><code>-(NSArray&lt;UICollectionViewLayoutAttributes *&gt; *)layoutAttributesForElementsInRect:(CGRect)rect</code></p>
+<ul>
+<li>这个方法的返回值，就决定了collectionView停止滚动时的偏移量</li>
+</ul>
+<p><code>-(CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity</code></p>
+<ul>
+<li>当collectionView的显示范围发生改变的时候，是否需要重新刷新布局</li>
+<li>一旦重新刷新布局，就会重新调用 layoutAttributesForElementsInRect:方法</li>
+</ul>
+<p><code>-(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds</code></p>
+<pre><code>- (<span class="keyword">void</span>)prepareLayout
+{
+    [<span class="keyword">super</span> prepareLayout];
+    <span class="comment">// 水平滚动</span>
+    <span class="keyword">self</span><span class="variable">.scrollDirection</span> = <span class="built_in">UICollectionViewScrollDirectionHorizontal</span>;
+       <span class="comment">// 设置内边距</span>
+    <span class="built_in">CGFloat</span> inset = (<span class="keyword">self</span><span class="variable">.collectionView</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span> - <span class="keyword">self</span><span class="variable">.itemSize</span><span class="variable">.width</span>) * <span class="number">0.5</span>;
+    <span class="keyword">self</span><span class="variable">.sectionInset</span> = <span class="built_in">UIEdgeInsetsMake</span>(<span class="number">0</span>, inset, <span class="number">0</span>, inset);
+}
+
+
+-(<span class="built_in">BOOL</span>)shouldInvalidateLayoutForBoundsChange:(<span class="built_in">CGRect</span>)newBounds {
+    <span class="keyword">return</span> <span class="literal">YES</span>;
+}
+
+-(<span class="built_in">NSArray</span>&lt;<span class="built_in">UICollectionViewLayoutAttributes</span> *&gt; *)layoutAttributesForElementsInRect:(<span class="built_in">CGRect</span>)rect {
+
+    <span class="comment">//取出父类算出的布局属性</span>
+    <span class="built_in">NSArray</span> *attsArray = [<span class="keyword">super</span> layoutAttributesForElementsInRect:rect];
+
+    <span class="comment">//collectionView中心点的值</span>
+    <span class="built_in">CGFloat</span> centerX = <span class="keyword">self</span><span class="variable">.collectionView</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span> / <span class="number">2</span> + <span class="keyword">self</span><span class="variable">.collectionView</span><span class="variable">.contentOffset</span><span class="variable">.x</span>;
+
+    <span class="comment">//一个个取出来进行更改</span>
+    <span class="keyword">for</span> (<span class="built_in">UICollectionViewLayoutAttributes</span> *atts <span class="keyword">in</span> attsArray) {
+        <span class="comment">// cell的中心点x 和 collectionView最中心点的x值 的间距</span>
+        <span class="built_in">CGFloat</span> space = ABS(atts<span class="variable">.center</span><span class="variable">.x</span> - centerX);
+        <span class="built_in">CGFloat</span> scale = <span class="number">1</span> - space/<span class="keyword">self</span><span class="variable">.collectionView</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>;
+        atts<span class="variable">.transform</span> = <span class="built_in">CGAffineTransformMakeScale</span>(scale, scale);
+
+    }
+    <span class="keyword">return</span> attsArray;
+}
+
+
+-(<span class="built_in">CGPoint</span>)targetContentOffsetForProposedContentOffset:(<span class="built_in">CGPoint</span>)proposedContentOffset withScrollingVelocity:(<span class="built_in">CGPoint</span>)velocity {
+
+     <span class="comment">// 计算出最终显示的矩形框</span>
+    <span class="built_in">CGRect</span> rect;
+    rect<span class="variable">.origin</span><span class="variable">.y</span> = <span class="number">0</span>;
+    rect<span class="variable">.origin</span><span class="variable">.x</span> = proposedContentOffset<span class="variable">.x</span>;<span class="comment">//最终要停下来的X</span>
+    rect<span class="variable">.size</span> = <span class="keyword">self</span><span class="variable">.collectionView</span><span class="variable">.frame</span><span class="variable">.size</span>;
+
+    <span class="comment">//获得计算好的属性</span>
+    <span class="built_in">NSArray</span> *attsArray = [<span class="keyword">super</span> layoutAttributesForElementsInRect:rect];
+    <span class="comment">//计算collection中心点X</span>
+    <span class="built_in">CGFloat</span> centerX = proposedContentOffset<span class="variable">.x</span> + <span class="keyword">self</span><span class="variable">.collectionView</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span> / <span class="number">2</span>;
+
+    <span class="built_in">CGFloat</span> minSpace = MAXFLOAT;
+    <span class="keyword">for</span> (<span class="built_in">UICollectionViewLayoutAttributes</span> *attrs <span class="keyword">in</span> attsArray) {
+
+        <span class="keyword">if</span> (ABS(minSpace) &gt; ABS(attrs<span class="variable">.center</span><span class="variable">.x</span> - centerX)) {
+            minSpace = attrs<span class="variable">.center</span><span class="variable">.x</span> - centerX;
+        }
+    }
+    <span class="comment">// 修改原有的偏移量</span>
+    proposedContentOffset<span class="variable">.x</span> += minSpace;
+    <span class="keyword">return</span> proposedContentOffset;
+
+}
+</code></pre><h2 id="圆形布局">圆形布局</h2><p><img src="http://7xoijj.com1.z0.glb.clouddn.com/ct04.png" alt=""></p>
+<p>不是线性，我们就不能继承 <code>UICollectionViewFlowLayout</code>了，我们需要继承 <code>UICollectionViewLayout</code></p>
+<h3 id="核心就是用圆，collectionView_的中心就是圆心，然后每一个cell的中心跟圆心的距离就是半径，根据一共有多少cell_算出每一个cell间的角度，根据角度我们就可以算出cell的centerX_跟_centerY，有了cell的中点就可以确定位置了"><strong>核心就是用圆，<code>collectionView</code> 的中心就是圆心，然后每一个cell的中心跟圆心的距离就是半径，根据一共有多少cell 算出每一个cell间的角度，根据角度我们就可以算出cell的centerX 跟 centerY，有了cell的中点就可以确定位置了</strong></h3><pre><code>-(<span class="keyword">void</span>)prepareLayout {
+
+    [<span class="keyword">super</span> prepareLayout];
+
+    [<span class="keyword">self</span><span class="variable">.attrsArray</span> removeAllObjects];
+    <span class="comment">//因为是一次性就显示在view上，所以可以一次性初始化</span>
+    <span class="comment">//collection一共有多少item</span>
+    <span class="built_in">NSInteger</span> count = [<span class="keyword">self</span><span class="variable">.collectionView</span> numberOfItemsInSection:<span class="number">0</span>];
+    <span class="keyword">for</span> (<span class="built_in">NSInteger</span> i=<span class="number">0</span>; i&lt;count; i++) {
+        <span class="comment">//自己写布局属性</span>
+        <span class="built_in">UICollectionViewLayoutAttributes</span> *attrs = [<span class="keyword">self</span> layoutAttributesForItemAtIndexPath:[<span class="built_in">NSIndexPath</span> indexPathForItem:i inSection:<span class="number">0</span>]];
+        [<span class="keyword">self</span><span class="variable">.attrsArray</span> addObject:attrs];
+    }
+}
+
+- (<span class="built_in">NSArray</span> *)layoutAttributesForElementsInRect:(<span class="built_in">CGRect</span>)rect {
+    <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.attrsArray</span>;
+}
+
+-(<span class="built_in">UICollectionViewLayoutAttributes</span> *)layoutAttributesForItemAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath {
+
+    <span class="built_in">NSInteger</span> count = [<span class="keyword">self</span><span class="variable">.collectionView</span> numberOfItemsInSection:<span class="number">0</span>];
+    <span class="built_in">CGFloat</span> radius = <span class="number">120</span>;
+
+    <span class="comment">//圆心</span>
+    <span class="built_in">CGFloat</span> circleX = <span class="keyword">self</span><span class="variable">.collectionView</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span> / <span class="number">2</span>;
+    <span class="built_in">CGFloat</span> circleY = <span class="keyword">self</span><span class="variable">.collectionView</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span> / <span class="number">2</span>;
+
+    <span class="built_in">UICollectionViewLayoutAttributes</span> *attrs = [<span class="built_in">UICollectionViewLayoutAttributes</span> layoutAttributesForCellWithIndexPath:indexPath];
+    attrs<span class="variable">.size</span> = <span class="built_in">CGSizeMake</span>(<span class="number">60</span>, <span class="number">60</span>);
+    <span class="comment">//如果还剩下一个cell</span>
+    <span class="keyword">if</span> (count == <span class="number">1</span>) {
+        attrs<span class="variable">.center</span> = <span class="built_in">CGPointMake</span>(circleX, circleY);
+        attrs<span class="variable">.size</span> = <span class="built_in">CGSizeMake</span>(<span class="number">150</span>, <span class="number">150</span>);
+    }<span class="keyword">else</span> {
+        <span class="built_in">CGFloat</span> angle = (<span class="number">2</span> * M_PI / count) * indexPath<span class="variable">.item</span>;<span class="comment">//每一个cell的角度</span>
+        <span class="built_in">CGFloat</span> centerX = circleX + radius * sin(angle);
+        <span class="built_in">CGFloat</span> centerY = circleY + radius * cos(angle);
+        attrs<span class="variable">.center</span> = <span class="built_in">CGPointMake</span>(centerX, centerY);
+    }
+
+    <span class="keyword">return</span> attrs;
+}
+</code></pre><h2 id="自定义布局是个很强大的东东，想算成什么样就有什么样的效果">自定义布局是个很强大的东东，想算成什么样就有什么样的效果</h2><h2 id="最后效果代码在Github上的地址"><a href="https://github.com/aeronxie/CustomLayout" target="_blank" rel="external">最后效果代码在Github上的地址</a></h2>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/03/10/KVO实现原理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">KVO实现原理</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="CollectionView自定义布局" data-title="CollectionView自定义布局" data-url="http://yoursite.com/2016/03/12/CollectionView自定义布局/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"aeronxie"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Aeron_Xie
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

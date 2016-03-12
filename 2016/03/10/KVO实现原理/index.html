@@ -16,7 +16,7 @@ KVO即Key-Value Observing，它提供一种机制，当指定的对象的属性�
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/K01.png">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/k02.png">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/k003.png">
-<meta property="og:updated_time" content="2016-03-10T03:00:03.000Z">
+<meta property="og:updated_time" content="2016-03-12T12:11:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KVO实现原理">
 <meta name="twitter:description" content="KVO 实现原理
@@ -121,7 +121,7 @@ KVO即Key-Value Observing，它提供一种机制，当指定的对象的属性�
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/CocoaPods/" style="font-size: 10px;">CocoaPods</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Objective-C/" style="font-size: 16.67px;">Objective-C</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Reactivecocoa/" style="font-size: 10px;">Reactivecocoa</a> <a href="/tags/Reveal/" style="font-size: 10px;">Reveal</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/runtime/" style="font-size: 13.33px;">runtime</a> <a href="/tags/随笔/" style="font-size: 13.33px;">随笔</a>
+						<a href="/tags/CocoaPods/" style="font-size: 10px;">CocoaPods</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Objective-C/" style="font-size: 16.67px;">Objective-C</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Reactivecocoa/" style="font-size: 10px;">Reactivecocoa</a> <a href="/tags/Reveal/" style="font-size: 10px;">Reveal</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/runtime/" style="font-size: 13.33px;">runtime</a> <a href="/tags/动画/" style="font-size: 10px;">动画</a> <a href="/tags/随笔/" style="font-size: 13.33px;">随笔</a>
 					</div>
 				</section>
 				
@@ -247,8 +247,7 @@ KVO即Key-Value Observing，它提供一种机制，当指定的对象的属性�
         <h2 id="KVO_实现原理">KVO 实现原理</h2><blockquote>
 <p>KVO即Key-Value Observing，它提供一种机制，当指定的对象的属性被修改后，则对象就会接受到通知。简单的说就是每次指定的被观察的对象的属性被修改后，KVO就会自动通知相应的观察者了。<br><a id="more"></a></p>
 </blockquote>
-<p>####KVO的原理</p>
-<ol>
+<h4 id="KVO的原理">KVO的原理</h4><ol>
 <li>当一个object有观察者时，动态创建这个object的类的子类</li>
 <li>对于每个被观察的property，重写其set方法</li>
 <li>在重写的set方法中调用- willChangeValueForKey:和- didChangeValueForKey:通知观察者</li>
@@ -311,8 +310,7 @@ KVO即Key-Value Observing，它提供一种机制，当指定的对象的属性�
 </code></pre><p>最后我们调用自己写的方法:</p>
 <pre><code>[p <span class="string">xf_addObserver:</span>self <span class="string">forKeyPath:</span>@<span class="string">"age"</span> <span class="string">options:</span>NSKeyValueObservingOptionNew <span class="string">context:</span>nil];
 </code></pre><p>一样可以观察到属性值的变化</p>
-<p>##总结</p>
-<h3 id="KVO底层实现原理:">KVO底层实现原理:</h3><ol>
+<h2 id="总结">总结</h2><h3 id="KVO底层实现原理:">KVO底层实现原理:</h3><ol>
 <li>动态创建NSKVONotifying_Person,NSKVONotifying_Person是Person子类,做KVO</li>
 <li>修改当前对象的isa指针-&gt;NSKVONotifying_Person</li>
 <li>只要调用对象的set,就会调用NSKVONotifying_Person的set方法</li>
@@ -330,6 +328,15 @@ KVO即Key-Value Observing，它提供一种机制，当指定的对象的属性�
   
     
 <nav id="article-nav">
+  
+    <a href="/2016/03/12/CollectionView自定义布局/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          CollectionView自定义布局
+        
+      </div>
+    </a>
   
   
     <a href="/2016/03/09/UIDynamic-详细用法/" id="article-nav-older" class="article-nav-link-wrap">

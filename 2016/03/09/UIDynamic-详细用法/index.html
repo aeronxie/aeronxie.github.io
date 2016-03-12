@@ -16,7 +16,7 @@ UIDynamic是从iOS 7开始引入的一种新技术，隶属于UIKit框架可以�
 什么是UIDynamic?
 UIDynamic是从iOS 7开始引入的一种新技术，隶属于UIKit框架可以认为是一种物理引擎，能模拟和仿真现实生活中的物理现象重力、弹性碰撞等现象">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/animator.gif">
-<meta property="og:updated_time" content="2016-03-09T11:53:45.000Z">
+<meta property="og:updated_time" content="2016-03-12T12:11:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UIDynamic 详细用法">
 <meta name="twitter:description" content="UIDynamic 详细用法
@@ -122,7 +122,7 @@ UIDynamic是从iOS 7开始引入的一种新技术，隶属于UIKit框架可以�
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/CocoaPods/" style="font-size: 10px;">CocoaPods</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Objective-C/" style="font-size: 16.67px;">Objective-C</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Reactivecocoa/" style="font-size: 10px;">Reactivecocoa</a> <a href="/tags/Reveal/" style="font-size: 10px;">Reveal</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/runtime/" style="font-size: 13.33px;">runtime</a> <a href="/tags/随笔/" style="font-size: 13.33px;">随笔</a>
+						<a href="/tags/CocoaPods/" style="font-size: 10px;">CocoaPods</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Objective-C/" style="font-size: 16.67px;">Objective-C</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Reactivecocoa/" style="font-size: 10px;">Reactivecocoa</a> <a href="/tags/Reveal/" style="font-size: 10px;">Reveal</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/runtime/" style="font-size: 13.33px;">runtime</a> <a href="/tags/动画/" style="font-size: 10px;">动画</a> <a href="/tags/随笔/" style="font-size: 13.33px;">随笔</a>
 					</div>
 				</section>
 				
@@ -250,17 +250,15 @@ UIDynamic是从iOS 7开始引入的一种新技术，隶属于UIKit框架可以�
 <p>UIDynamic是从iOS 7开始引入的一种新技术，隶属于UIKit框架<br>可以认为是一种物理引擎，能模拟和仿真现实生活中的物理现象<br>重力、弹性碰撞等现象</p>
 </blockquote>
 <a id="more"></a>
-<p>###UIDynamic使用步骤</p>
-<ul>
+<h3 id="UIDynamic使用步骤">UIDynamic使用步骤</h3><ul>
 <li>创建一个物理仿真器（顺便设置仿真范围）</li>
 <li>创建相应的物理仿真行为（顺便添加物理仿真元素）</li>
 <li>将物理仿真行为添加到物理仿真器中，开始仿真</li>
 </ul>
-<p>###物理仿真元素<br>不是任何对象都能做物理仿真元素，不是任何对象都能进行物理仿真</p>
+<h3 id="物理仿真元素">物理仿真元素</h3><p>不是任何对象都能做物理仿真元素，不是任何对象都能进行物理仿真</p>
 <p><strong>哪些对象才能做物理仿真元素？</strong></p>
 <p>任何遵守了UIDynamicItem协议的对象<br>UIView默认已经遵守了UIDynamicItem协议，因此任何UI控件都能做物理仿真<br>UICollectionViewLayoutAttributes类默认也遵守UIDynamicItem协议</p>
-<p>###物理仿真行为</p>
-<ul>
+<h3 id="物理仿真行为">物理仿真行为</h3><ul>
 <li>UIDynamic提供了以下几种物理仿真行为</li>
 <li>UIGravityBehavior：重力行为</li>
 <li>UICollisionBehavior：碰撞行为</li>
@@ -269,23 +267,22 @@ UIDynamic是从iOS 7开始引入的一种新技术，隶属于UIKit框架可以�
 <li>UIAttachmentBehavior：附着行为</li>
 <li>UIDynamicItemBehavior：动力元素行为</li>
 </ul>
-<p>###物理仿真器<br>它可以让物理仿真元素执行物理仿真行为，它是UIDynamicAnimator类型的对象<br>UIDynamicAnimator的初始化</p>
+<h3 id="物理仿真器">物理仿真器</h3><p>它可以让物理仿真元素执行物理仿真行为，它是UIDynamicAnimator类型的对象<br>UIDynamicAnimator的初始化</p>
 <p><code>- (instancetype)initWithReferenceView:(UIView *)view;</code></p>
 <p>view参数：是一个参照视图，表示物理仿真的范围</p>
-<p>####UIDynamicAnimator的常见方法<br>//添加1个物理仿真行为</p>
+<h4 id="UIDynamicAnimator的常见方法">UIDynamicAnimator的常见方法</h4><p>//添加1个物理仿真行为</p>
 <p><code>- (void)addBehavior:(UIDynamicBehavior *)behavior;</code></p>
 <p>//移除1个物理仿真行为</p>
 <p><code>- (void)removeBehavior:(UIDynamicBehavior *)behavior;</code></p>
 <p>//移除之前添加过的所有物理仿真行为</p>
 <p><code>- (void)removeAllBehaviors;</code></p>
-<p>####UIDynamicAnimator的常见属性<br>//参照视图</p>
+<h4 id="UIDynamicAnimator的常见属性">UIDynamicAnimator的常见属性</h4><p>//参照视图</p>
 <p><code>@property (nonatomic, readonly) UIView* referenceView;</code></p>
 <p>//添加到物理仿真器中的所有物理仿真行为</p>
 <p><code>@property (nonatomic, readonly, copy) NSArray* behaviors;</code></p>
 <p>//是否正在进行物理仿真<br><code>@property (nonatomic, readonly, getter = isRunning) BOOL running;</code></p>
 <p>//代理对象（能监听物理仿真器的仿真过程，比如开始和结束）<br><code>@property (nonatomic, assign) id &lt;UIDynamicAnimatorDelegate&gt; delegate;</code></p>
-<p>###直接上代码</p>
-<pre><code><span class="preprocessor">#import <span class="title">"ViewController.h"</span></span>
+<h3 id="直接上代码">直接上代码</h3><pre><code><span class="preprocessor">#import <span class="title">"ViewController.h"</span></span>
 
 <span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span>
 <span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>) <span class="built_in">UIDynamicAnimator</span> *animator;
@@ -338,8 +335,7 @@ UIDynamic是从iOS 7开始引入的一种新技术，隶属于UIKit框架可以�
     <span class="keyword">return</span> _animator;
 }
 <span class="keyword">@end</span>
-</code></pre><p>###效果</p>
-<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/animator.gif" alt=""></p>
+</code></pre><h3 id="效果">效果</h3><p><img src="http://7xoijj.com1.z0.glb.clouddn.com/animator.gif" alt=""></p>
 
       
     </div>

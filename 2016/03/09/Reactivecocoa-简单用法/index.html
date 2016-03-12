@@ -13,7 +13,7 @@ ReactiveCocoa（其简称为 RAC）是由 Github 开源的一个应用于 iOS �
 <meta property="og:site_name" content="Aeron_Xie">
 <meta property="og:description" content="Reactivecocoa 简单用法
 ReactiveCocoa（其简称为 RAC）是由 Github 开源的一个应用于 iOS 和 OS X 开发的新框架。RAC 具有函数式编程和响应式编程的特性，所以ReactiveCocoa被描述为函数响应式编程（FRP）框架。用起来简洁方便。">
-<meta property="og:updated_time" content="2016-03-09T11:52:51.000Z">
+<meta property="og:updated_time" content="2016-03-12T12:11:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Reactivecocoa 简单用法">
 <meta name="twitter:description" content="Reactivecocoa 简单用法
@@ -118,7 +118,7 @@ ReactiveCocoa（其简称为 RAC）是由 Github 开源的一个应用于 iOS �
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/CocoaPods/" style="font-size: 10px;">CocoaPods</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Objective-C/" style="font-size: 16.67px;">Objective-C</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Reactivecocoa/" style="font-size: 10px;">Reactivecocoa</a> <a href="/tags/Reveal/" style="font-size: 10px;">Reveal</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/runtime/" style="font-size: 13.33px;">runtime</a> <a href="/tags/随笔/" style="font-size: 13.33px;">随笔</a>
+						<a href="/tags/CocoaPods/" style="font-size: 10px;">CocoaPods</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Objective-C/" style="font-size: 16.67px;">Objective-C</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Reactivecocoa/" style="font-size: 10px;">Reactivecocoa</a> <a href="/tags/Reveal/" style="font-size: 10px;">Reveal</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/runtime/" style="font-size: 13.33px;">runtime</a> <a href="/tags/动画/" style="font-size: 10px;">动画</a> <a href="/tags/随笔/" style="font-size: 13.33px;">随笔</a>
 					</div>
 				</section>
 				
@@ -245,16 +245,14 @@ ReactiveCocoa（其简称为 RAC）是由 Github 开源的一个应用于 iOS �
 <p>ReactiveCocoa（其简称为 RAC）是由 Github 开源的一个应用于 iOS 和 OS X 开发的新框架。RAC 具有函数式编程和响应式编程的特性，所以ReactiveCocoa被描述为函数响应式编程（FRP）框架。用起来简洁方便。</p>
 </blockquote>
 <a id="more"></a>
-<p>####<a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="external">ReactiveCocoa</a> 主要由以下四大核心组件构成：</p>
-<ul>
+<h4 id="ReactiveCocoa_主要由以下四大核心组件构成："><a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="external">ReactiveCocoa</a> 主要由以下四大核心组件构成：</h4><ul>
 <li>信号源：<code>RACStream</code> 及其子类；</li>
 <li>订阅者：<code>RACSubscriber</code> 的实现类及其子类；</li>
 <li>调度器：<code>RACScheduler</code> 及其子类；</li>
 <li>清洁工：<code>RACDisposable</code> 及其子类。</li>
 </ul>
 <p>信号源是最核心的部分</p>
-<p>####ReactiveCocoa开发中常见用法。</p>
-<ul>
+<h4 id="ReactiveCocoa开发中常见用法。">ReactiveCocoa开发中常见用法。</h4><ul>
 <li><p>代替代理: <code>rac_signalForSelector：</code> 用于替代代理。</p>
 </li>
 <li><p>代替KVO : <code>rac_valuesAndChangesForKeyPath：</code> 用于监听某个对象的属性改变。</p>
@@ -326,8 +324,7 @@ if <span class="list">(<span class="keyword">valid.boolValue</span>)</span> <spa
     }</span>]</span><span class="comment">;        </span>
 </code></pre></li>
 </ul>
-<p>####ReactiveCocoa常见宏</p>
-<ul>
+<h4 id="ReactiveCocoa常见宏">ReactiveCocoa常见宏</h4><ul>
 <li><p><code>RAC(TARGET, [KEYPATH, [NIL_VALUE]]):</code> 用于给某个对象的某个属性绑定。</p>
 <p>  // 只要文本框文字改变，就会修改label的文字<br>  <code>RAC(self.labelView,text) = _textField.rac_textSignal;</code></p>
 </li>
@@ -351,8 +348,7 @@ RACTuple *tuple = RACTuplePack(<span class="string">@"xmg"</span>,@<span class="
 RACTupleUnpack(<span class="built_in">NSString</span> *name,<span class="built_in">NSNumber</span> *age) = tuple;            
 </code></pre></li>
 </ul>
-<p>#####详细教程请参考：</p>
-<p><a href="http://www.raywenderlich.com/74106/mvvm-tutorial-with-reactivecocoa-part-1" target="_blank" rel="external">第一部分</a><br><a href="http://www.raywenderlich.com/74106/mvvm-tutorial-with-reactivecocoa-part-2" target="_blank" rel="external">第二部分</a>     </p>
+<h5 id="详细教程请参考：">详细教程请参考：</h5><p><a href="http://www.raywenderlich.com/74106/mvvm-tutorial-with-reactivecocoa-part-1" target="_blank" rel="external">第一部分</a><br><a href="http://www.raywenderlich.com/74106/mvvm-tutorial-with-reactivecocoa-part-2" target="_blank" rel="external">第二部分</a>     </p>
 
       
     </div>
