@@ -202,6 +202,66 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-iOS通讯录管理-AddressBook-AddressBookUI" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/25/iOS通讯录管理-AddressBook-AddressBookUI/" class="article-date">
+  	<time datetime="2016-03-25T12:24:47.000Z" itemprop="datePublished">2016-03-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/25/iOS通讯录管理-AddressBook-AddressBookUI/">iOS通讯录管理(AddressBook, AddressBookUI)</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>iOS中的通讯录是存储在数据库中的，由于iOS的权限设计，开发人员是不允许直接访问通讯录数据库的，必须依靠AddressBook提供的标准API来实现通讯录操作。<br>有2个框架可以访问用户的通讯录:<br><code>AddressBookUI.framework</code><br>提供了联系人列表界面、联系人详情界面、添加联系人界面等<br>一般用于选择联系人.<br><code>AddressBook.framework</code><br>纯C语言的API，仅仅是获得联系人数据<br>没有提供UI界面展示，需要自己搭建联系人展示界面<br>里面的数据类型大部分基于Core Foundation框架，使用起来极其蛋疼,但是需要注意的是这个框架是基于C语言编写的，无法使用ARC来管理内存，开发者需要自己管理内存.</p>
+</blockquote>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/03/25/iOS通讯录管理-AddressBook-AddressBookUI/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-iOS本地推送-远程推送" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -747,72 +807,9 @@
 
 
   
-    <article id="post-动态修改NavigationBar的颜色" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/07/动态修改NavigationBar的颜色/" class="article-date">
-  	<time datetime="2015-12-07T04:37:19.000Z" itemprop="datePublished">2015-12-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/07/动态修改NavigationBar的颜色/">动态修改NavigationBar的颜色</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>如果我们想动态的修改NavigationBar的颜色会肿么做呢？ </p>
-</blockquote>
-<p>首先我们想到的肯定是在UISrollView的delegate方法</p>
-<p><code>- (void)scrollViewDidScroll:(UIScrollView *)scrollView</code></p>
-<p>根据当前的<code>contentOffset</code>更新navigationBar的backgroundColor即可.<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/12/07/动态修改NavigationBar的颜色/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>
