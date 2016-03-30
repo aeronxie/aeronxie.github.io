@@ -114,7 +114,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/CocoaPods/" style="font-size: 10px;">CocoaPods</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Objective-C/" style="font-size: 16.67px;">Objective-C</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Reactivecocoa/" style="font-size: 10px;">Reactivecocoa</a> <a href="/tags/Reveal/" style="font-size: 10px;">Reveal</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/runtime/" style="font-size: 13.33px;">runtime</a> <a href="/tags/动画/" style="font-size: 10px;">动画</a> <a href="/tags/推送/" style="font-size: 10px;">推送</a> <a href="/tags/随笔/" style="font-size: 13.33px;">随笔</a>
+						<a href="/tags/CocoaPods/" style="font-size: 10px;">CocoaPods</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Objective-C/" style="font-size: 16.67px;">Objective-C</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Reactivecocoa/" style="font-size: 10px;">Reactivecocoa</a> <a href="/tags/Reveal/" style="font-size: 10px;">Reveal</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/runtime/" style="font-size: 13.33px;">runtime</a> <a href="/tags/传感器/" style="font-size: 10px;">传感器</a> <a href="/tags/动画/" style="font-size: 10px;">动画</a> <a href="/tags/推送/" style="font-size: 10px;">推送</a> <a href="/tags/随笔/" style="font-size: 13.33px;">随笔</a>
 					</div>
 				</section>
 				
@@ -202,6 +202,151 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-传感器的使用-学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/30/传感器的使用-学习笔记/" class="article-date">
+  	<time datetime="2016-03-30T07:24:07.000Z" itemprop="datePublished">2016-03-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/30/传感器的使用-学习笔记/">传感器的使用(学习笔记)</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="距离传感器">距离传感器</h1><blockquote>
+<p>感应是否有其他物体靠近设备屏幕（打电话自动锁屏）</p>
+</blockquote>
+<pre><code><span class="comment">// 开启距离感应功能</span>
+[<span class="built_in">UIDevice</span> currentDevice]<span class="variable">.proximityMonitoringEnabled</span> = <span class="literal">YES</span>;
+<span class="comment">// 监听距离感应的通知</span>
+[[<span class="built_in">NSNotificationCenter</span> defaultCenter] addObserver:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(proximityChange:) name:<span class="built_in">UIDeviceProximityStateDidChangeNotification</span> object:<span class="literal">nil</span>];
+
+- (<span class="keyword">void</span>)proximityChange:(<span class="built_in">NSNotificationCenter</span> *)notification {
+    <span class="keyword">if</span> ([<span class="built_in">UIDevice</span> currentDevice]<span class="variable">.proximityState</span> == <span class="literal">YES</span>) {
+        <span class="built_in">NSLog</span>(<span class="string">@"屏幕被遮挡了"</span>); 
+} <span class="keyword">else</span> {
+        <span class="built_in">NSLog</span>(<span class="string">@"屏幕被遮挡了"</span>); 
+    }
+}
+</code></pre><h1 id="加速计">加速计</h1><blockquote>
+<p>用于检测设备的运动（比如摇晃,计步）<strong>检测设备在X、Y、Z轴上的加速度 （哪个方向有力的作用，哪个方向运动了）<br>根据加速度数值，就可以判断出在各个方向上的作用力度</strong></p>
+<p>随着iPhone4的推出，加速度计全面升级，并引入了陀螺仪，与Motion（运动）相关的编程成为重头戏<br>苹果特地在iOS4中增加了专门处理Motion的框架  <strong><code>CoreMotion.framework</code></strong><br>Core Motion不仅能够提供实时的加速度值和旋转速度值，更重要的是，苹果在其中集成了很多牛逼的算法</p>
+</blockquote>
+<p><strong>Core Motion获取数据的两种方式:</strong></p>
+<ul>
+<li>push: 实时采集所有数据（采集频率高）</li>
+<li>pull: 在有需要的时候，再主动去采集数据</li>
+</ul>
+<h4 id="Core_Motion的使用步骤（push）">Core Motion的使用步骤（push）</h4><ul>
+<li>创建运动管理者对象 </li>
+</ul>
+<p><code>CMMotionManager *mgr = [[CMMotionManager alloc] init];</code></p>
+<ul>
+<li>判断加速计是否可用（最好判断） </li>
+</ul>
+<p><code>if (mgr.isAccelerometerAvailable) { // 加速计可用 }</code></p>
+<ul>
+<li>设置采样间隔 </li>
+</ul>
+<p><code>mgr.accelerometerUpdateInterval = 1.0/30.0; // 1秒钟采样30次</code></p>
+<ul>
+<li>开始采样（采样到数据就会调用handler，handler会在queue中执行）</li>
+</ul>
+<p><code>- (void)startAccelerometerUpdatesToQueue:(NSOperationQueue *)queue withHandler:(CMAccelerometerHandler)handler;</code></p>
+<h4 id="Core_Motion的使用步骤（pull）">Core Motion的使用步骤（pull）</h4><ul>
+<li>创建运动管理者对象</li>
+</ul>
+<p><code>CMMotionManager *mgr = [[CMMotionManager alloc] init];</code></p>
+<ul>
+<li>判断加速计是否可用（最好判断）</li>
+</ul>
+<p><code>if (mgr.isAccelerometerAvailable) { // 加速计可用 }</code></p>
+<ul>
+<li>开始采样</li>
+</ul>
+<p><code>- (void)startAccelerometerUpdates;</code></p>
+<ul>
+<li>在需要的时候采集加速度数据</li>
+</ul>
+<p><code>CMAcceleration acc = mgr.accelerometerData.acceleration;
+NSLog(@&quot;%f, %f, %f&quot;, acc.x, acc.y, acc.z);</code></p>
+<h3 id="摇一摇">摇一摇</h3><blockquote>
+<p> 监控摇一摇的方法:</p>
+<p>方法1：通过分析加速计数据来判断是否进行了摇一摇操作（比较复杂）</p>
+<p>方法2：iOS自带的Shake监控API（非常简单）</p>
+</blockquote>
+<p>判断摇一摇的步骤：实现3个摇一摇监听方法</p>
+<pre><code>- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent <span class="keyword">*</span>)event /<span class="keyword">*</span><span class="keyword">*</span> 检测到摇动 <span class="keyword">*</span>/
+- (void)motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent <span class="keyword">*</span>)event /<span class="keyword">*</span><span class="keyword">*</span> 摇动取消(被中断) <span class="keyword">*</span>/
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent <span class="keyword">*</span>)event /<span class="keyword">*</span><span class="keyword">*</span> 摇动结束 <span class="keyword">*</span>/
+</code></pre><h3 id="计步器">计步器</h3><blockquote>
+<p>CMStepCounter 类提供访问用户携带设备步行的步数接口，步行信息通过内置硬件去采集和存储，让第三方可以通过查询数据来获知用户最近的身体运动情况。第三方可以通过这个类收集当前或任何历史的步行数据。</p>
+</blockquote>
+<p>这个类使用起来非常的简单：</p>
+<ul>
+<li>用于判断设备是否支持计步</li>
+</ul>
+<p><code>+ (BOOL)isStepCountingAvailable;</code></p>
+<ul>
+<li>收集并返回某一时间段内的历史步数数据（queue不能为nil）</li>
+</ul>
+<p><code>- (void)queryStepCountStartingFrom:(NSDate *)start
+                                to:(NSDate *)end
+                           toQueue:(NSOperationQueue *)queue
+                       withHandler:(CMStepQueryHandler)handler;</code></p>
+<ul>
+<li>开始更新步数计数 （queue不能为nil）</li>
+</ul>
+<p><code>- (void)startStepCountingUpdatesToQueue:(NSOperationQueue *)queue
+                               updateOn:(NSInteger)stepCounts
+                            withHandler:(CMStepUpdateHandler)handler;</code></p>
+<ul>
+<li>停止更新步数计数</li>
+</ul>
+<p><code>- (void)stopStepCountingUpdates;</code></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/传感器/">传感器</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-iOS通讯录管理-AddressBook-AddressBookUI" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -219,7 +364,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/25/iOS通讯录管理-AddressBook-AddressBookUI/">iOS通讯录管理(AddressBook, AddressBookUI)(学习笔记)</a>
+      <a class="article-title" href="/2016/03/25/iOS通讯录管理-AddressBook-AddressBookUI/">iOS通讯录管理(AddressBook, AddressBookUI) (学习笔记)</a>
     </h1>
   
 
@@ -733,64 +878,6 @@
       
         <p class="article-more-link">
           <a  href="/2016/03/08/瀑布流的使用/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-UIScrollView-无法滑动解决办法" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/13/UIScrollView-无法滑动解决办法/" class="article-date">
-  	<time datetime="2015-12-13T04:18:12.000Z" itemprop="datePublished">2015-12-13</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/13/UIScrollView-无法滑动解决办法/">UIScrollView 无法滑动解决办法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近在做项目的时候，用到了Storyboard，往里面拖了一个scrollView，然后在scrollView又加了很多控件，但是一跑起来，就不能滑动了。。。。这是神马情况？ 按正常情况，scrollView不能滑动，要不就是 <code>contentSize</code> 比 scrollView 的 <code>frame</code> 小,要不就是 <code>scrollEnabled</code> 属性没设置成 <code>YES</code>.<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/12/13/UIScrollView-无法滑动解决办法/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
