@@ -3,18 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>记2016第一次腾讯实习面试 | Aeron_Xie</title>
+  <title>iOS图片处理 | Aeron_Xie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="人生中第一次经历面试。">
+  <meta name="description" content="如何把 GIF 动图保存到相册？iOS 的相册是支持保存 GIF 和 APNG 动图的，只是不能直接播放。用 [ALAssetsLibrary writeImageDataToSavedPhotosAlbum:metadata:completionBlock] 可以直接把 APNG、GIF 的数据写入相册。如果图省事直接用 UIImageWriteToSavedPhotosAlbum() 写相册，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记2016第一次腾讯实习面试">
-<meta property="og:url" content="http://yoursite.com/2016/04/19/记2016第一次腾讯实习面试/index.html">
+<meta property="og:title" content="iOS图片处理">
+<meta property="og:url" content="http://yoursite.com/2016/06/29/iOS图片处理/index.html">
 <meta property="og:site_name" content="Aeron_Xie">
-<meta property="og:description" content="人生中第一次经历面试。">
-<meta property="og:updated_time" content="2016-04-19T12:34:11.000Z">
+<meta property="og:description" content="如何把 GIF 动图保存到相册？iOS 的相册是支持保存 GIF 和 APNG 动图的，只是不能直接播放。用 [ALAssetsLibrary writeImageDataToSavedPhotosAlbum:metadata:completionBlock] 可以直接把 APNG、GIF 的数据写入相册。如果图省事直接用 UIImageWriteToSavedPhotosAlbum() 写相册，">
+<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/image_baseline.gif">
+<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/image_interlaced.gif">
+<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/image_progressive.gif">
+<meta property="og:updated_time" content="2016-06-29T07:04:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="记2016第一次腾讯实习面试">
-<meta name="twitter:description" content="人生中第一次经历面试。">
+<meta name="twitter:title" content="iOS图片处理">
+<meta name="twitter:description" content="如何把 GIF 动图保存到相册？iOS 的相册是支持保存 GIF 和 APNG 动图的，只是不能直接播放。用 [ALAssetsLibrary writeImageDataToSavedPhotosAlbum:metadata:completionBlock] 可以直接把 APNG、GIF 的数据写入相册。如果图省事直接用 UIImageWriteToSavedPhotosAlbum() 写相册，">
   
     <link rel="alternative" href="/atom.xml" title="Aeron_Xie" type="application/atom+xml">
   
@@ -201,11 +204,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-记2016第一次腾讯实习面试" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-iOS图片处理" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/04/19/记2016第一次腾讯实习面试/" class="article-date">
-  	<time datetime="2016-04-19T12:30:43.000Z" itemprop="datePublished">2016-04-19</time>
+      <a href="/2016/06/29/iOS图片处理/" class="article-date">
+  	<time datetime="2016-06-29T07:02:28.000Z" itemprop="datePublished">2016-06-29</time>
 </a>
     </div>
   
@@ -218,7 +221,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      记2016第一次腾讯实习面试
+      iOS图片处理
     </h1>
   
 
@@ -227,7 +230,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/腾讯/">腾讯</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
 	</div>
 
         
@@ -238,13 +241,39 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>人生中第一次经历面试。</p>
-</blockquote>
+        <h3 id="如何把_GIF_动图保存到相册？">如何把 GIF 动图保存到相册？</h3><p>iOS 的相册是支持保存 GIF 和 APNG 动图的，只是不能直接播放。用 <code>[ALAssetsLibrary writeImageDataToSavedPhotosAlbum:metadata:completionBlock]</code> 可以直接把 APNG、GIF 的数据写入相册。如果图省事直接用 UIImageWriteToSavedPhotosAlbum() 写相册，那么图像会被强制转码为 PNG。</p>
 <a id="more"></a>
-<p>在3月下旬的时候就投了各大公司的简历，准备在假期找一份实习工作，顺便也是锻炼下自己。投的是<code>iOS开发</code>，在4月2日的时候进行了网上笔试，题目设涉及的方面是比较广泛的，计算机网络、操作系统、编译原理等。。。由于笔主非计算机专业，所以基础并不好~~答题的时候很多也不会，本以为就是上去试试题目，没想到12号的时候却收到了面试的短信。</p>
-<p>当时还是有点小激动的，于是晚上就买好了去哈尔滨的票（笔主在长春）。第二天进行面试，提前30分钟到达面试地点，人不是很多。由于是第一次面试，还是很紧张的<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">面试我的应该是个leader，进去之后，问了我没有做过什么项目，便把手机上做的一个app给他看了，还算满意。之后说实习大部分看你的是基础知识掌握情况，就给了我一张纸，回答他问的题目。</span><br><span class="line"></span><br><span class="line"><span class="label">### 总结下面试官问的几个问题:</span></span><br><span class="line"></span><br><span class="line"><span class="escape">`1</span>. 链表反转<span class="escape">`</span><br><span class="line"></span></span><br><span class="line"><span class="escape">`2</span>. strcmp函数的实现？<span class="escape">`</span><br><span class="line"></span></span><br><span class="line"><span class="escape">`3</span>. n个数中找出现次数最多的？<span class="escape">`</span><br><span class="line"></span></span><br><span class="line"><span class="escape">`4</span>. n个数中找两个数相加等于<span class="number">100</span>的对数？<span class="escape">`</span><br><span class="line"></span></span><br><span class="line"><span class="escape">`5</span>. 什么是红黑树，以及使用场景？<span class="escape">`</span><br><span class="line"></span></span><br><span class="line"></span><br><span class="line">第一次面试，第一次在纸上写代码，对<span class="escape">`D</span>SA<span class="escape">`掌</span>握并不好，整个过程中，没有一个关于iOS 的问题，自己还特别的紧张，各种原因，答的不好，出来的时候才反应过来，这些题并不难，就算不会的也大概有个思路。。。如果<span class="escape">`D</span>SA<span class="escape">`掌</span>握的不错，这些题没有什么问题的，有了这次的面试经验，知道自己哪里还欠缺，还需要继续补基础知识，希望下次还能再杀回来</span><br></pre></td></tr></table></figure></p>
-<h3 id="总结：DSA很重要！！！！">总结：<code>DSA</code>很重要！！！！</h3>
+<h3 id="将_UIImage_保存到磁盘，用什么方式最好？">将 UIImage 保存到磁盘，用什么方式最好？</h3><p>目前来说，保存 UIImage 有三种方式：</p>
+<ol>
+<li>直接用 NSKeyedArchiver 把 UIImage 序列化保存，</li>
+<li>用 UIImagePNGRepresentation() 先把图片转为 PNG 保存，</li>
+<li>用 UIImageJPEGRepresentation() 把图片压缩成 JPEG 保存。</li>
+</ol>
+<p>实际上，<code>NSKeyedArchiver</code> 是调用了 <code>UIImagePNGRepresentation</code> 进行序列化的，用它来保存图片是消耗最大的。苹果对 JPEG 有硬编码和硬解码，保存成 JPEG 会大大缩减编码解码时间，也能减小文件体积。所以如果图片不包含透明像素时，<code>UIImageJPEGRepresentation(0.9)</code> 是最佳的图片保存方式，其次是 <code>UIImagePNGRepresentation()</code>。</p>
+<h3 id="UIImage_缓存是怎么回事？">UIImage 缓存是怎么回事？</h3><p>通过 imageNamed 创建 UIImage 时，系统实际上只是在 Bundle 内查找到文件名，然后把这个文件名放到 UIImage 里返回，并没有进行实际的文件读取和解码。当 UIImage 第一次显示到屏幕上时，其内部的解码方法才会被调用，同时解码结果会保存到一个全局缓存去。据我观察，在图片解码后，App 第一次退到后台和收到内存警告时，该图片的缓存才会被清空，其他情况下缓存会一直存在。</p>
+<h3 id="我要是用_imageWithData_能不能避免缓存呢？">我要是用 imageWithData 能不能避免缓存呢？</h3><p>不能。通过数据创建 UIImage 时，UIImage 底层是调用 ImageIO 的 <code>CGImageSourceCreateWithData()</code> 方法。该方法有个参数叫 ShouldCache，在 64 位的设备上，这个参数是默认开启的。这个图片也是同样在第一次显示到屏幕时才会被解码，随后解码数据被缓存到 CGImage 内部。与 imageNamed 创建的图片不同，如果这个图片被释放掉，其内部的解码数据也会被立刻释放。</p>
+<h3 id="怎么能避免缓存呢？">怎么能避免缓存呢？</h3><ol>
+<li>手动调用 <code>CGImageSourceCreateWithData()</code> 来创建图片，并把 ShouldCache 和 ShouldCacheImmediately 关掉。这么做会导致每次图片显示到屏幕时，解码方法都会被调用，造成很大的 CPU 占用。</li>
+<li>把图片用 <code>CGContextDrawImage()</code> 绘制到画布上，然后把画布的数据取出来当作图片。这也是常见的网络图片库的做法。</li>
+</ol>
+<h3 id="我能直接取到图片解码后的数据，而不是通过画布取到吗？">我能直接取到图片解码后的数据，而不是通过画布取到吗？</h3><ol>
+<li><code>CGImageSourceCreateWithData(data)</code> 创建 ImageSource。</li>
+<li><code>CGImageSourceCreateImageAtIndex(source)</code> 创建一个未解码的 CGImage。</li>
+<li><code>CGImageGetDataProvider(image)</code> 获取这个图片的数据源。</li>
+<li><code>CGDataProviderCopyData(provider)</code> 从数据源获取直接解码的数据。<br>ImageIO 解码发生在最后一步，这样获得的数据是没有经过颜色类型转换的原生数据（比如灰度图像）。</li>
+</ol>
+<h3 id="如何判断一个文件的图片类型？">如何判断一个文件的图片类型？</h3><p>通过读取文件或数据的头几个字节然后和对应图片格式标准进行比对。我在这里写了一个简单的函数，能很快速的判断图片格式。</p>
+<h3 id="怎样像浏览器那样边下载边显示图片？">怎样像浏览器那样边下载边显示图片？</h3><p>首先，图片本身有 3 种常见的编码方式：</p>
+<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/image_baseline.gif" alt=""></p>
+<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/image_interlaced.gif" alt=""></p>
+<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/image_progressive.gif" alt=""></p>
+<ul>
+<li>第一种是 baseline，即逐行扫描。默认情况下，JPEG、PNG、GIF 都是这种保存方式。</li>
+<li>第二种是 interlaced，即隔行扫描。PNG 和 GIF 在保存时可以选择这种格式。</li>
+<li>第三种是 progressive，即渐进式。JPEG 在保存时可以选择这种方式。<br>在下载图片时，首先用 <code>CGImageSourceCreateIncremental(NULL)</code> 创建一个空的图片源，随后在获得新数据时调用<br><code>CGImageSourceUpdateData(data, false)</code> 来更新图片源，最后在用 <code>CGImageSourceCreateImageAtIndex()</code> 创建图片来显示。</li>
+</ul>
+<pre><code><span class="list">(<span class="keyword">转自Ibireme的博客</span>)</span>                                        
+</code></pre>
       
     </div>
     
@@ -253,18 +282,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/06/29/iOS图片处理/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          iOS图片处理
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/03/30/传感器的使用-学习笔记/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">传感器的使用 (学习笔记)</div>
+    <a href="/2016/04/19/记2016第一次腾讯实习面试/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">记2016第一次腾讯实习面试</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -293,7 +313,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="记2016第一次腾讯实习面试" data-title="记2016第一次腾讯实习面试" data-url="http://yoursite.com/2016/04/19/记2016第一次腾讯实习面试/"></div>
+	<div class="ds-thread" data-thread-key="iOS图片处理" data-title="iOS图片处理" data-url="http://yoursite.com/2016/06/29/iOS图片处理/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
