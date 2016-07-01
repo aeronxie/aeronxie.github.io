@@ -10,10 +10,7 @@
 struct ListNode {
     int data;
     ListNode *next;
-};
-1. 在O(1)时间删除链表节点题目描述：给定链表的头指针和一个节点指针，在O(1)时间删除该节点。
-
-分">
+};">
 <meta property="og:type" content="article">
 <meta property="og:title" content="链表学习">
 <meta property="og:url" content="http://yoursite.com/2016/07/01/链表学习/index.html">
@@ -23,10 +20,7 @@ struct ListNode {
 struct ListNode {
     int data;
     ListNode *next;
-};
-1. 在O(1)时间删除链表节点题目描述：给定链表的头指针和一个节点指针，在O(1)时间删除该节点。
-
-分">
+};">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/1.gif">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/2.gif">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/3.gif">
@@ -36,7 +30,7 @@ struct ListNode {
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/7.gif">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/8.gif">
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/81b78497tw1eesdi7bb2kj20d403qaa0.jpg">
-<meta property="og:updated_time" content="2016-07-01T07:01:31.000Z">
+<meta property="og:updated_time" content="2016-07-01T07:04:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="链表学习">
 <meta name="twitter:description" content="链表问题在面试过程中也是很重要也很基础的一部分，链表本身很灵活，很考查编程功底，所以是很值得考的地方。我将复习过程中觉得比较好的链表问题整理了下。
@@ -44,10 +38,7 @@ struct ListNode {
 struct ListNode {
     int data;
     ListNode *next;
-};
-1. 在O(1)时间删除链表节点题目描述：给定链表的头指针和一个节点指针，在O(1)时间删除该节点。
-
-分">
+};">
   
     <link rel="alternative" href="/atom.xml" title="Aeron_Xie" type="application/atom+xml">
   
@@ -277,7 +268,8 @@ struct ListNode {
     int data;
     ListNode *next;
 };
-</code></pre><h2 id="1-_在O(1)时间删除链表节点">1. 在O(1)时间删除链表节点</h2><p>题目描述：给定链表的头指针和一个节点指针，在O(1)时间删除该节点。</p>
+</code></pre><a id="more"></a>
+<h2 id="1-_在O(1)时间删除链表节点">1. 在O(1)时间删除链表节点</h2><p>题目描述：给定链表的头指针和一个节点指针，在O(1)时间删除该节点。</p>
 <blockquote>
 <p>分析：在链表中删除一个结点，最常规的做法是从链表的头结点开始，顺序查找要删除的结点，找到之后再删除。由于需要顺序查找，时间复杂度自然就是O(n) 了。<br>我们之所以需要从头结点开始查找要删除的结点，是因为我们需要得到要删除的结点的前面一个结点。我们试着换一种思路。我们可以从给定的结点得到它的下一个结点。这个时候我们实际删除的是它的下一个结点，由于我们已经得到实际删除的结点的前面一个结点，因此完全是可以实现的。当然，在删除之前，我们需要需要把给定的结点的下一个结点的数据拷贝到给定的结点中。此时，时间复杂度为O(1)。</p>
 </blockquote>
