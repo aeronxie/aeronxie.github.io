@@ -30,7 +30,7 @@ struct ListNode {
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/7.gif">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/8.gif">
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/81b78497tw1eesdi7bb2kj20d403qaa0.jpg">
-<meta property="og:updated_time" content="2016-07-01T07:04:05.000Z">
+<meta property="og:updated_time" content="2016-07-01T14:50:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="链表学习">
 <meta name="twitter:description" content="链表问题在面试过程中也是很重要也很基础的一部分，链表本身很灵活，很考查编程功底，所以是很值得考的地方。我将复习过程中觉得比较好的链表问题整理了下。
@@ -436,7 +436,25 @@ r = q-&gt;<span class="keyword">next</span>;
 <blockquote>
 <p>分析：如果有环且两个链表相交，则两个链表都有共同一个环，即环上的任意一个节点都存在于两个链表上。因此，就可以判断一链表上俩指针相遇的那个节点，在不在另一条链表上。    </p>
 </blockquote>
+<p>代码如下：</p>
+<pre><code><span class="keyword">bool</span> isIntersectWithLoop(ListNode *head1,ListNode *head2) {
 
+    ListNode *circleNode1,*circleNode2;
+    <span class="comment">//判断链表带不带环，并保存环内节点</span>
+    <span class="keyword">if</span> (!hasCircle(head1, circleNode1))
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    <span class="keyword">if</span> (!hasCircle(head2, circleNode2))
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+
+    ListNode *temp = circleNode2-&gt;next;
+    <span class="keyword">while</span> (temp != circleNode2) {
+        <span class="keyword">if</span> (temp == circleNode1)
+            <span class="keyword">return</span> <span class="keyword">true</span>;
+        temp = temp-&gt;next;
+    }
+    <span class="keyword">return</span> <span class="keyword">false</span>;
+}    
+</code></pre>
       
     </div>
     
