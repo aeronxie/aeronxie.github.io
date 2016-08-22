@@ -30,7 +30,9 @@ struct ListNode {
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/7.gif">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/8.gif">
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/81b78497tw1eesdi7bb2kj20d403qaa0.jpg">
-<meta property="og:updated_time" content="2016-07-01T14:50:03.000Z">
+<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/lian01.png">
+<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/lian02.png">
+<meta property="og:updated_time" content="2016-08-22T08:53:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="链表学习">
 <meta name="twitter:description" content="链表问题在面试过程中也是很重要也很基础的一部分，链表本身很灵活，很考查编程功底，所以是很值得考的地方。我将复习过程中觉得比较好的链表问题整理了下。
@@ -453,7 +455,102 @@ r = q-&gt;<span class="keyword">next</span>;
         temp = temp-&gt;next;
     }
     <span class="keyword">return</span> <span class="keyword">false</span>;
-}    
+}
+</code></pre><h2 id="8-链表中倒数第k个节点">8.链表中倒数第k个节点</h2><p>题目描述：输入一个链表，输出该链表中倒数第k个结点。</p>
+<blockquote>
+<p>为了实现一次遍历链表就能找到倒数第k个结点，我们可以定义两个指针，第一个从链表的头指针开始遍历向前走k-1，第二个指针保持不动，从第K步开始，第二个指针也开始从链表的头指针开始遍历.由于两个指针的距离保持在k-1，当第一个指针到达链表的尾结点时，第二个指针正好是第k个结点.</p>
+</blockquote>
+<p>代码如下:</p>
+<pre><code>ListNode *FindthToTail(ListNode *phead,unsigned <span class="built_in">int</span> k) {
+
+    <span class="keyword">if</span> (phead == <span class="literal">NULL</span> || phead-&gt;<span class="keyword">next</span> == <span class="literal">NULL</span>) {
+        <span class="keyword">return</span> <span class="literal">NULL</span><span class="comment">;</span>
+    }
+    ListNode *pFast = phead<span class="comment">;</span>
+    ListNode *pLow = <span class="literal">NULL</span><span class="comment">;</span>
+
+    <span class="keyword">for</span> (unsigned <span class="built_in">int</span> i = <span class="number">0</span><span class="comment">; i&lt;k-1; i++) {</span>
+        pFast = pFast-&gt;<span class="keyword">next</span><span class="comment">;</span>
+    }
+
+    pLow = phead<span class="comment">;</span>
+
+    <span class="keyword">while</span> (pFast-&gt; <span class="keyword">next</span> != <span class="literal">NULL</span>) {
+        pFast = pFast-&gt;<span class="keyword">next</span><span class="comment">;</span>
+        pLow = pLow-&gt;<span class="keyword">next</span><span class="comment">;</span>
+    }
+    <span class="keyword">return</span> pLow<span class="comment">;</span>
+}
+</code></pre><h2 id="9-合并两个排序的链表">9.合并两个排序的链表</h2><p>题目描述：输入两个递增排序的链表，合并这两个链表并使新链表中的结点仍然是按照递增排序的.</p>
+<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/lian01.png" alt=""></p>
+<blockquote>
+<p>链表1的头结点的值小于链表2的头结点的值，因此链表1的头结点将是合并后链表的头结点.在剩余的结点中，链表2的头结点的值小于链表1的头结点的值，因此链表2的头结点是剩余结点的头结点，把这个结点和之前已经合并好的链表的尾结点链接起来.</p>
+</blockquote>
+<p>代码如下:</p>
+<pre><code>ListNode *Merge (ListNode *head1, ListNode *head2) {
+
+    <span class="keyword">if</span> (head1 == <span class="built_in">NULL</span>) {
+        <span class="keyword">return</span> head2;
+    } <span class="keyword">else</span> <span class="keyword">if</span> (head2 == <span class="built_in">NULL</span>)
+        <span class="keyword">return</span> head1;
+
+    ListNode *mergedHead = <span class="built_in">NULL</span>;
+
+    <span class="keyword">if</span> (head1<span class="subst">-&gt;</span><span class="built_in">data</span> &lt; head2<span class="subst">-&gt;</span><span class="built_in">data</span>) {
+        mergedHead = head1;
+        mergedHead<span class="subst">-&gt;</span>next = Merge(head1<span class="subst">-&gt;</span>next,head2);
+    } <span class="keyword">else</span> {
+        mergedHead = head2;
+        mergedHead<span class="subst">-&gt;</span>next = Merge(head1,head2<span class="subst">-&gt;</span>next);
+    }
+    <span class="keyword">return</span> mergedHead;
+}
+</code></pre><h2 id="10-两个链表的第一个公共结点">10.两个链表的第一个公共结点</h2><p>题目描述：输入两个链表，找出它们的第一个公共结点.</p>
+<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/lian02.png" alt=""></p>
+<blockquote>
+<p>从链表结点的定义可以看出，这两个链表是单向链表，如果两个单向链表有公共结点，那么这两个链表从某一结点开始，他们的next都是指向同一个结点.但是由于是单向链表的结点，每个结点只有一个next，因此从第一个公共结点开始，之后他们所有结点都是重合的，不可能再出现分叉。</p>
+</blockquote>
+<p>代码如下:</p>
+<pre><code><span class="function">ListNode *<span class="title">FindFirstCommonNode</span><span class="params">(ListNode *head1, ListNode *head2)</span> </span>{
+
+    <span class="comment">// 得到两个链表长度</span>
+    <span class="keyword">unsigned</span> <span class="keyword">int</span> nLength1 = GetListLength(head1);
+    <span class="keyword">unsigned</span> <span class="keyword">int</span> nLength2 = GetListLength(head2);
+    <span class="keyword">int</span> nLengthDiff = nLength1 - nLength2;
+
+    ListNode *pListHeadLong = head1;
+    ListNode *pListHeadShort = head2;
+
+    <span class="keyword">if</span> (nLength2 &gt; nLength1) {
+        pListHeadLong = head2;
+        pListHeadShort = head1;
+        nLengthDiff = nLength2 - nLength1;
+    }
+    <span class="comment">// 长链表先走</span>
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;nLengthDiff;i++) {
+        pListHeadLong = pListHeadLong-&gt;next;
+    }
+
+    <span class="keyword">while</span> (pListHeadLong != <span class="literal">NULL</span> &amp;&amp; pListHeadShort != <span class="literal">NULL</span> &amp;&amp; pListHeadShort != pListHeadLong) {
+        pListHeadLong = pListHeadLong-&gt;next;
+        pListHeadShort = pListHeadShort-&gt;next;
+    }
+
+    ListNode *pCommonNode = pListHeadLong;
+    <span class="keyword">return</span> pCommonNode;
+}
+<span class="comment">// 获取链表长度</span>
+<span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">GetListLength</span><span class="params">(ListNode *head)</span> </span>{
+
+    <span class="keyword">unsigned</span> <span class="keyword">int</span> length = <span class="number">0</span>;
+    ListNode *pNode = head;
+
+    <span class="keyword">while</span> (head != <span class="literal">NULL</span>) {
+        length ++;
+        pNode = pNode-&gt;next;
+    }
+    <span class="keyword">return</span> length;
+}
 </code></pre>
       
     </div>
