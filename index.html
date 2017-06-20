@@ -241,7 +241,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>最近在研究检测页面卡顿的问题，发现基本上都是基于Runloop的，所以打算把Runloop再好好复习一遍，于是就写这篇文字记录一下。</p>
+<p>最近在研究检测页面卡顿的问题，发现基本上都是基于Runloop的，所以打算把Runloop再好好复习一遍，于是就把学习的过程记录一下。</p>
 </blockquote>
 <h6 id="在OSX/iOS_系统中，提供了两个对象：NSRunLoop（线程不安全）_和_CFRunLoopRef（线程安全）。但是NSRunloop是闭源的，我们无法直接查看到内部实现，但是CFRunLoopRef是开源的，CFRunLoopRef_在_CoreFoundation_框架内，它提供了纯_C_函数的_API，接下来我们就分析一下CFRunLoopRef的内部实现。目前最新的版本是_CF-855-17-">在OSX/iOS 系统中，提供了两个对象：<code>NSRunLoop</code>（线程不安全） 和 <code>CFRunLoopRef</code>（线程安全）。但是<code>NSRunloop</code>是闭源的，我们无法直接查看到内部实现，但是<code>CFRunLoopRef</code>是<a href="https://opensource.apple.com/tarballs/CF/">开源</a>的，<code>CFRunLoopRef</code> 在 <code>CoreFoundation</code> 框架内，它提供了纯 C 函数的 API，接下来我们就分析一下<code>CFRunLoopRef</code>的内部实现。目前最新的版本是 <code>CF-855.17</code>.</h6>
       
