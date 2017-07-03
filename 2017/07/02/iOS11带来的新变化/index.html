@@ -22,6 +22,7 @@
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/2170491-f0fd3e0d1ac00b94.png">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/9F65C887-C6A9-4C77-BB8C-2A9C02D952B4.png">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/55D8D47B-73A9-4DC5-B877-AA941526CC88.png">
+<meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/ios11.gif">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/E6ADA0DC-3AFE-40AF-B23A-913562AE2EF5.png">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/128DCE3F-E513-4A54-978A-0796333E1B1E.png">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/D9BCD965-EF34-42D3-A634-619C9C4F59ED.png">
@@ -30,7 +31,7 @@
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/B7037544-6D80-49EE-95F0-ECB4D6BEC9D4.png">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/2DA3A668-F8B6-429C-986A-D24A58743DCF.png">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/B469A824-89DA-47AC-BC09-948A135D86A2.png">
-<meta property="og:updated_time" content="2017-07-02T08:59:25.000Z">
+<meta property="og:updated_time" content="2017-07-03T09:05:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS11带来的新变化">
 <meta name="twitter:description" content="iOS11 新功能
@@ -311,6 +312,9 @@
 <p><code>UINavigationItemLargeTitleDisplayModeAutomatic</code><br><code>UINavigationItemLargeTitleDisplayModeAlways</code><br><code>UINavigationItemLargeTitleDisplayModeNever</code><br>用于控制显示的模式，默认显示大标题，而当屏幕向上滑动的时候标题缩小恢复到过去的小标题样式</p>
 <p><img src="http://7xoijj.com1.z0.glb.clouddn.com/9F65C887-C6A9-4C77-BB8C-2A9C02D952B4.png" alt=""></p>
 <p><img src="http://7xoijj.com1.z0.glb.clouddn.com/55D8D47B-73A9-4DC5-B877-AA941526CC88.png" alt=""></p>
+<p>iOS中还提供了快速加入🔍的方法，跟TableView配合，就可以自动隐藏展示。。。<br>只需要加入如下代码：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span><span class="variable">.navigationItem</span><span class="variable">.searchController</span> = [[<span class="built_in">UISearchController</span> alloc] initWithSearchResultsController:<span class="literal">nil</span>];</span><br><span class="line"><span class="keyword">self</span><span class="variable">.navigationItem</span><span class="variable">.hidesSearchBarWhenScrolling</span> = <span class="literal">YES</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xoijj.com1.z0.glb.clouddn.com/ios11.gif" alt=""></p>
 <h2 id="API调整">API调整</h2><ul>
 <li><p>iOS11下，苹果对相册的权限key做了调整，原来的 <a href="https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW17" target="_blank" rel="external">NSPhotoLibraryUsageDescription</a> ，在iOS11之后，改成了<a href="https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW73" target="_blank" rel="external">NSPhotoLibraryAddUsageDescription</a></p>
 </li>
