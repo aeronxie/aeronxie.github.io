@@ -5,20 +5,20 @@
   
   <title>Mach-O与有趣的dyld | Aeron_Xie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在程序启动的时候,我们总是认为程序的入口是从main函数开始的,但是在此之前, dyld已经干了很多事情了, 那什么是dyld呢? 它能够干什么, 它又有什么作用呢? 接下来, 就来研究下这个神奇的定西…">
+  <meta name="description" content="在程序启动的时候,我们总是认为程序的入口是从main函数开始的,但是在此之前, dyld已经干了很多事情了, 那什么是dyld呢? 它能够干什么, 它又有什么作用呢? 接下来, 就来研究下这个神奇的东西…">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mach-O与有趣的dyld">
 <meta property="og:url" content="http://yoursite.com/2017/09/11/Mach-O与有趣的dyld/index.html">
 <meta property="og:site_name" content="Aeron_Xie">
-<meta property="og:description" content="在程序启动的时候,我们总是认为程序的入口是从main函数开始的,但是在此之前, dyld已经干了很多事情了, 那什么是dyld呢? 它能够干什么, 它又有什么作用呢? 接下来, 就来研究下这个神奇的定西…">
+<meta property="og:description" content="在程序启动的时候,我们总是认为程序的入口是从main函数开始的,但是在此之前, dyld已经干了很多事情了, 那什么是dyld呢? 它能够干什么, 它又有什么作用呢? 接下来, 就来研究下这个神奇的东西…">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/852671-9fde036a1ce9d902.jpg">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/14DD71F0-A1C3-4672-B4FE-166B3FA95F6E.png">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/923493B7-123E-4743-8A77-0B9587E3D03A.png">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/67EBFA2E-E882-4353-8257-2A5615DB392D.png">
-<meta property="og:updated_time" content="2017-09-11T06:53:24.000Z">
+<meta property="og:updated_time" content="2017-09-11T07:02:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mach-O与有趣的dyld">
-<meta name="twitter:description" content="在程序启动的时候,我们总是认为程序的入口是从main函数开始的,但是在此之前, dyld已经干了很多事情了, 那什么是dyld呢? 它能够干什么, 它又有什么作用呢? 接下来, 就来研究下这个神奇的定西…">
+<meta name="twitter:description" content="在程序启动的时候,我们总是认为程序的入口是从main函数开始的,但是在此之前, dyld已经干了很多事情了, 那什么是dyld呢? 它能够干什么, 它又有什么作用呢? 接下来, 就来研究下这个神奇的东西…">
   
     <link rel="alternative" href="/atom.xml" title="Aeron_Xie" type="application/atom+xml">
   
@@ -255,7 +255,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>在程序启动的时候,我们总是认为程序的入口是从main函数开始的,但是在此之前, <code>dyld</code>已经干了很多事情了, 那什么是<code>dyld</code>呢? 它能够干什么, 它又有什么作用呢? 接下来, 就来研究下这个神奇的定西…</p>
+<p>在程序启动的时候,我们总是认为程序的入口是从main函数开始的,但是在此之前, <code>dyld</code>已经干了很多事情了, 那什么是<code>dyld</code>呢? 它能够干什么, 它又有什么作用呢? 接下来, 就来研究下这个神奇的东西…</p>
 </blockquote>
 <a id="more"></a>
 <h2 id="Mach-O">Mach-O</h2><p>我们先来看下<code>Mach-O</code>, 在OS X 与 iOS 系统上的可执行文件格式是<code>Mach-O</code>, 我们编译过程产生的.O文件,以及程序的可执行文件, 动态库等都是<code>Mach-O</code>文件. 我们来看看下<code>Mach-O</code>结构:</p>
