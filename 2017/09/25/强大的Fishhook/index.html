@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>强大的Fishhook | Aeron_Xie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在iOS中，如果我们需要替换一个函数的实现，我们会想到通过Method Swizzle来实现，其实也就是通过runtime提供的API在运行时将函数的实现给替换了，正是因为Objective-C是动态语言,所以我们可以通过runtime做各种事情。。。但是如果是静态语言（C），我们是否也可以将函数hook住呢？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="强大的Fishhook">
+<meta property="og:url" content="http://yoursite.com/2017/09/25/强大的Fishhook/index.html">
+<meta property="og:site_name" content="Aeron_Xie">
+<meta property="og:description" content="在iOS中，如果我们需要替换一个函数的实现，我们会想到通过Method Swizzle来实现，其实也就是通过runtime提供的API在运行时将函数的实现给替换了，正是因为Objective-C是动态语言,所以我们可以通过runtime做各种事情。。。但是如果是静态语言（C），我们是否也可以将函数hook住呢？">
+<meta property="og:updated_time" content="2017-09-25T02:16:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="强大的Fishhook">
+<meta name="twitter:description" content="在iOS中，如果我们需要替换一个函数的实现，我们会想到通过Method Swizzle来实现，其实也就是通过runtime提供的API在运行时将函数的实现给替换了，正是因为Objective-C是动态语言,所以我们可以通过runtime做各种事情。。。但是如果是静态语言（C），我们是否也可以将函数hook住呢？">
+  
+    <link rel="alternative" href="/atom.xml" title="Aeron_Xie" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="img/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://avatars1.githubusercontent.com/u/32269?v=3&amp;s=460" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Aeron_Xie</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/aeronxie" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/1919135421/home?wvr=5" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/xie-fei-75-92" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="https://mail.google.com/mail/#inbox" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Block/" style="font-size: 10px;">Block</a> <a href="/tags/C/" style="font-size: 12.5px;">C++</a> <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/CocoaPods/" style="font-size: 10px;">CocoaPods</a> <a href="/tags/GCD/" style="font-size: 10px;">GCD</a> <a href="/tags/Git/" style="font-size: 12.5px;">Git</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Mach-O/" style="font-size: 12.5px;">Mach-O</a> <a href="/tags/Objc/" style="font-size: 10px;">Objc</a> <a href="/tags/Objective-C/" style="font-size: 17.5px;">Objective-C</a> <a href="/tags/PPTP/" style="font-size: 10px;">PPTP</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Reactivecocoa/" style="font-size: 10px;">Reactivecocoa</a> <a href="/tags/Reveal/" style="font-size: 10px;">Reveal</a> <a href="/tags/Runloop/" style="font-size: 10px;">Runloop</a> <a href="/tags/Runtime/" style="font-size: 10px;">Runtime</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/VPS/" style="font-size: 10px;">VPS</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/iOS11/" style="font-size: 10px;">iOS11</a> <a href="/tags/runtime/" style="font-size: 15px;">runtime</a> <a href="/tags/verson/" style="font-size: 10px;">verson</a> <a href="/tags/传感器/" style="font-size: 10px;">传感器</a> <a href="/tags/动画/" style="font-size: 10px;">动画</a> <a href="/tags/推送/" style="font-size: 10px;">推送</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/腾讯/" style="font-size: 10px;">腾讯</a> <a href="/tags/链表/" style="font-size: 10px;">链表</a> <a href="/tags/随笔/" style="font-size: 12.5px;">随笔</a> <a href="/tags/面试/" style="font-size: 12.5px;">面试</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://laichanwai.github.io/">Ivy的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://maru-zhang.github.io">maru的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.jianshu.com/users/b82d2721ba07/latest_articles">叶孤城的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.onevcat.com/">喵神的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://kittenyang.com/">Kitten Yong的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.ibireme.com/">Ibireme的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.sunnyxx.com/">我就叫Sunny的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.devtang.com/">唐巧的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.desgard.com/">瓜的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://draveness.me/">Draveness的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://southpeak.github.io/">南峰子的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.jianshu.com/u/12201cdd5d7a">冰霜的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.jianshu.com/u/3e55748920d2">Bestswift的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.cnbang.net/">bang神</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://fullstack.blog/">fullstack</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">一个二流大学喜欢iOS开发的一个大学生，喜欢各种新鲜事物，会android \ swift \ python \ java \ C \ javascript \ mysql \ jsp单词的拼写~~~~</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Aeron_Xie</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://avatars1.githubusercontent.com/u/32269?v=3&amp;s=460" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Aeron_Xie</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/aeronxie" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1919135421/home?wvr=5" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/xie-fei-75-92" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="https://mail.google.com/mail/#inbox" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-强大的Fishhook" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/09/25/强大的Fishhook/" class="article-date">
+  	<time datetime="2017-09-25T02:15:00.000Z" itemprop="datePublished">2017-09-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      强大的Fishhook
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mach-O/">Mach-O</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>在iOS中，如果我们需要替换一个函数的实现，我们会想到通过<code>Method Swizzle</code>来实现，其实也就是通过<code>runtime</code>提供的API在运行时将函数的实现给替换了，正是因为<code>Objective-C</code>是动态语言,所以我们可以通过<code>runtime</code>做各种事情。。。但是如果是静态语言（C），我们是否也可以将函数<code>hook</code>住呢？</p>
+</blockquote>
+<a id="more"></a>
+<h5 id="答案也是肯定的,Facebook提供了一个强大的库Fishhook，静态语言我们也仍然可以hook住接下来，我们就来分析下这个强大的库是如何实现的">答案也是肯定的,<code>Facebook</code>提供了一个强大的库<a href="https://github.com/facebook/fishhooks" target="_blank" rel="external">Fishhook</a>，静态语言我们也仍然可以hook住<del>接下来，我们就来分析下这个强大的库是如何实现的</del></h5><p>先来看下官方的解释:</p>
+<p><code>dyld</code> 通过更新 <code>Mach-O</code> 二进制文件 <code>__DATA</code> 段中的指针来绑定 <code>lazy</code> 和 <code>non-lazy</code> 的符号(在 Mach-O 中，相对应的就是 <code>_nl_symbol_ptr</code>（non-lazy符号表）和 <code>_la_symbol_ptr</code>（lazy符号表）, 这两个指针表，保存了与符号表表对应的函数指针。<br>) ，<code>fishhook</code> 先确定某一个符号在 <code>__DATA</code> 段中的位置，然后保存原符号对应的函数指针，并使用新的函数指针覆盖原有符号的函数指针，实现重绑定。</p>
+<p>##源码<br>在<code>fishhook</code>的<code>.h</code>文件中，只有很少的东西，两个函数接口和一个结构体</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">struct</span> rebinding &#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">char</span> *name;  </span><br><span class="line">  <span class="keyword">void</span> *replacement;  <span class="comment">// 被替换的函数</span></span><br><span class="line">  <span class="keyword">void</span> **replaced;    <span class="comment">// 替换函数</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span><br><span class="line"> * For each rebinding in rebindings, rebinds references to external, indirect</span><br><span class="line"> * symbols with the specified name to instead point at replacement for each</span><br><span class="line"> * image in the calling process as well as for all future images that are loaded</span><br><span class="line"> * by the process. If rebind_functions is called more than once, the symbols to</span><br><span class="line"> * rebind are added to the existing list of rebindings, and if a given symbol</span><br><span class="line"> * is rebound more than once, the later rebinding will take precedence.</span><br><span class="line"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> rebind_symbols(<span class="keyword">struct</span> rebinding rebindings[], size_t rebindings_nel);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span><br><span class="line"> * Rebinds as above, but only in the specified image. The header should point</span><br><span class="line"> * to the mach-o header, the slide should be the slide offset. Others as above.</span><br><span class="line"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> rebind_symbols_image(<span class="keyword">void</span> *header,</span><br><span class="line">                         intptr_t slide,</span><br><span class="line">                         <span class="keyword">struct</span> rebinding rebindings[],</span><br><span class="line">                         size_t rebindings_nel);</span><br></pre></td></tr></table></figure>
+<h2 id="rebind_symbols">rebind_symbols</h2><p>先来看一下<code>rebind_symbols</code>函数</p>
+<p><code>int rebind_symbols(struct rebinding rebindings[], size_t rebindings_nel);</code> </p>
+<p>这个方法便是我们用于实现hook的方法，我们来看下实现</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> rebind_symbols(<span class="keyword">struct</span> rebinding rebindings[], size_t rebindings_nel) &#123;</span><br><span class="line">  <span class="keyword">int</span> retval = prepend_rebindings(&amp;_rebindings_head, rebindings, rebindings_nel);</span><br><span class="line">  <span class="keyword">if</span> (retval &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> retval;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// If this was the first call, register callback for image additions (which is also invoked for</span></span><br><span class="line">  <span class="comment">// existing images, otherwise, just run on existing images</span></span><br><span class="line">  <span class="keyword">if</span> (!_rebindings_head-&gt;next) &#123;</span><br><span class="line">    _dyld_register_func_for_add_image(_rebind_symbols_for_image);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    uint32_t c = _dyld_image_count();</span><br><span class="line">    <span class="keyword">for</span> (uint32_t i = <span class="number">0</span>; i &lt; c; i++) &#123;</span><br><span class="line">      _rebind_symbols_for_image(_dyld_get_image_header(i), _dyld_get_image_vmaddr_slide(i));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> retval;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数传递了一个<code>rebinding</code>结构体数组，以及数组的个数，在 <code>rebind_symbols</code> 函数中，首先调用了 <code>prepend_rebindings</code> 函数，传入了 <code>_rebindings_head</code>， <code>rebindings</code> 数组，以及数组个数 . 如果<code>retval</code>小于0，则直接返回<code>retval</code>，如果<code>retval</code>大于0，并且<code>_rebindings_head-&gt;next</code>为空，则直接调用<code>_dyld_register_func_for_add_image</code> 注册回调函数<code>_rebind_symbols_for_image</code>, 如果<code>_rebindings_head-&gt;next</code>不为空，则直接执行回调函数</p>
+<p><code>dyld</code> 加载镜像（image ，在 Mach-O 中，所有的可执行文件、dylib、Bundle 都是 image）时，会为增加的镜像注册回调函数并执行（包括已经存在的镜像）。传入镜像的<code>mach_header</code> 和 <code>slide</code>，同时也会为所有已加载的 <code>image</code> 执行回调。</p>
+<h2 id="prepend_rebindings">prepend_rebindings</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> prepend_rebindings(<span class="keyword">struct</span> rebindings_entry **rebindings_head,</span><br><span class="line">                              <span class="keyword">struct</span> rebinding rebindings[],</span><br><span class="line">                              size_t nel) &#123;</span><br><span class="line">  <span class="keyword">struct</span> rebindings_entry *new_entry = (<span class="keyword">struct</span> rebindings_entry *) malloc(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> rebindings_entry));</span><br><span class="line">  <span class="keyword">if</span> (!new_entry) &#123;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  new_entry-&gt;rebindings = (<span class="keyword">struct</span> rebinding *) malloc(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> rebinding) * nel);</span><br><span class="line">  <span class="keyword">if</span> (!new_entry-&gt;rebindings) &#123;</span><br><span class="line">    free(new_entry);</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  memcpy(new_entry-&gt;rebindings, rebindings, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> rebinding) * nel);</span><br><span class="line">  new_entry-&gt;rebindings_nel = nel;</span><br><span class="line">  new_entry-&gt;next = *rebindings_head;</span><br><span class="line">  *rebindings_head = new_entry;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> rebindings_entry &#123;</span><br><span class="line">  <span class="keyword">struct</span> rebinding *rebindings;</span><br><span class="line">  size_t rebindings_nel;</span><br><span class="line">  <span class="keyword">struct</span> rebindings_entry *next;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">struct</span> rebindings_entry *_rebindings_head;</span><br></pre></td></tr></table></figure>
+<p>首先定义一个 <code>rebindings_entry</code> 类型的 <code>new_entry</code> 结构体，并初始化，给 <code>new_entry</code> 以及 <code>new_entry-&gt;rebindings</code> 分配内存。 然后通过<code>memcpy</code>函数拷贝传入的 <code>rebindings</code>数组 到 <code>new_entry-&gt;rebindings</code> 中 , 同时给 <code>new_entry-&gt;rebindings_nel</code> 赋值数组的个数，将 <code>new_entry-&gt;next</code> 赋值<code>_rebindings_head 内的值</code> ,最后再使 <code>_rebindings_head</code> 与 <code>new_entry</code> 指向同一个地址 , 也就是将<code>new_entry</code>添加到 <code>_rebings_head</code> 这个链表的头部</p>
+<h2 id="rebind__symbols__for__image">rebind _symbols _for _image</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> _rebind_symbols_for_image(<span class="keyword">const</span> <span class="keyword">struct</span> mach_header *header,</span><br><span class="line">                                      intptr_t slide) &#123;</span><br><span class="line">    rebind_symbols_for_image(_rebindings_head, header, slide);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>_rebind_symbols_for_image</code> 函数中仅仅是调了<code>rebind_symbols_for_image</code></p>
+<p>而<code>rebind_symbols_for_image</code>才是核心函数</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> rebind_symbols_for_image(<span class="keyword">struct</span> rebindings_entry *rebindings,</span><br><span class="line">                                     <span class="keyword">const</span> <span class="keyword">struct</span> mach_header *header,</span><br><span class="line">                                     intptr_t slide) &#123;</span><br><span class="line">  Dl_info info;</span><br><span class="line">  <span class="keyword">if</span> (dladdr(header, &amp;info) == <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  segment_command_t *cur_seg_cmd;                 <span class="comment">// segment_command_64</span></span><br><span class="line">  segment_command_t *linkedit_segment = <span class="literal">NULL</span>;     <span class="comment">//segment_command_64</span></span><br><span class="line">  <span class="keyword">struct</span> symtab_command* symtab_cmd = <span class="literal">NULL</span>;       <span class="comment">// LC_SYMTAB</span></span><br><span class="line">  <span class="keyword">struct</span> dysymtab_command* dysymtab_cmd = <span class="literal">NULL</span>;   <span class="comment">// LC_DYSYMTAB</span></span><br><span class="line"></span><br><span class="line">  uintptr_t cur = (uintptr_t)header + <span class="keyword">sizeof</span>(mach_header_t);</span><br><span class="line">  <span class="keyword">for</span> (uint i = <span class="number">0</span>; i &lt; header-&gt;ncmds; i++, cur += cur_seg_cmd-&gt;cmdsize) &#123;</span><br><span class="line">    cur_seg_cmd = (segment_command_t *)cur;</span><br><span class="line">    <span class="keyword">if</span> (cur_seg_cmd-&gt;cmd == LC_SEGMENT_ARCH_DEPENDENT) &#123;</span><br><span class="line">      <span class="keyword">if</span> (strcmp(cur_seg_cmd-&gt;segname, SEG_LINKEDIT) == <span class="number">0</span>) &#123;</span><br><span class="line">  	    <span class="comment">//遍历寻找__LINKEDIT</span></span><br><span class="line">        linkedit_segment = cur_seg_cmd;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (cur_seg_cmd-&gt;cmd == LC_SYMTAB) &#123;</span><br><span class="line">      <span class="comment">//遍历寻找lc_symtab</span></span><br><span class="line">      symtab_cmd = (<span class="keyword">struct</span> symtab_command*)cur_seg_cmd;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (cur_seg_cmd-&gt;cmd == LC_DYSYMTAB) &#123;</span><br><span class="line">   	  <span class="comment">//遍历寻找lc_dysymtab</span></span><br><span class="line">      dysymtab_cmd = (<span class="keyword">struct</span> dysymtab_command*)cur_seg_cmd;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!symtab_cmd || !dysymtab_cmd || !linkedit_segment ||</span><br><span class="line">      !dysymtab_cmd-&gt;nindirectsyms) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">================================Import=======================================</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Find base symbol/string table addresses</span></span><br><span class="line">  uintptr_t linkedit_base = (uintptr_t)slide + linkedit_segment-&gt;vmaddr - linkedit_segment-&gt;fileoff;</span><br><span class="line">  nlist_t *symtab = (nlist_t *)(linkedit_base + symtab_cmd-&gt;symoff);</span><br><span class="line">  <span class="keyword">char</span> *strtab = (<span class="keyword">char</span> *)(linkedit_base + symtab_cmd-&gt;stroff);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Get indirect symbol table (array of uint32_t indices into symbol table)</span></span><br><span class="line">  uint32_t *indirect_symtab = (uint32_t *)(linkedit_base + dysymtab_cmd-&gt;indirectsymoff);</span><br><span class="line"></span><br><span class="line">=============================================================================</span><br><span class="line"></span><br><span class="line">  cur = (uintptr_t)header + <span class="keyword">sizeof</span>(mach_header_t);</span><br><span class="line">  <span class="keyword">for</span> (uint i = <span class="number">0</span>; i &lt; header-&gt;ncmds; i++, cur += cur_seg_cmd-&gt;cmdsize) &#123;</span><br><span class="line">    cur_seg_cmd = (segment_command_t *)cur;</span><br><span class="line">    <span class="keyword">if</span> (cur_seg_cmd-&gt;cmd == LC_SEGMENT_ARCH_DEPENDENT) &#123;</span><br><span class="line">      <span class="keyword">if</span> (strcmp(cur_seg_cmd-&gt;segname, SEG_DATA) != <span class="number">0</span> &amp;&amp;</span><br><span class="line">          strcmp(cur_seg_cmd-&gt;segname, SEG_DATA_CO<span class="built_in">NST</span>) != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">for</span> (uint j = <span class="number">0</span>; j &lt; cur_seg_cmd-&gt;nsects; j++) &#123;</span><br><span class="line">        section_t *sect =</span><br><span class="line">          (section_t *)(cur + <span class="keyword">sizeof</span>(segment_command_t)) + j;</span><br><span class="line">        <span class="keyword">if</span> ((sect-&gt;flags &amp; SECTION_TYPE) == S_LAZY_SYMBOL_POINTERS) &#123;</span><br><span class="line">        <span class="comment">// sect为Section，symtab为符号表，strtab字符串表，indirect_symtab动态符号表（indirect symbol table）</span></span><br><span class="line">          perform_rebinding_with_section(rebindings, sect, slide, symtab, strtab, indirect_symtab);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ((sect-&gt;flags &amp; SECTION_TYPE) == S_NON_LAZY_SYMBOL_POINTERS) &#123;</span><br><span class="line">          perform_rebinding_with_section(rebindings, sect, slide, symtab, strtab, indirect_symtab);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数主要是在寻找<code>__LINKEDIT</code>、<code>LC_DYSYMTAB</code>、<code>LC_SYMTAB</code>的信息, 并计算符号表的地址</p>
+<p><code>__LINKEDIT段</code>: 含有为动态链接库使用的原始数据，比如符号，字符串，重定位表条目等等</p>
+<p><code>ASLR</code>：<code>Address space layout randomization</code>，将可执行程序随机加载载到内存中,这里的随机只是偏移，而不是打乱，就是通过内核将<code>Mach-O</code>的段偏移某个随机（slide）系数. 也就是说程序的基址等于__LINKEDIT的地址减去偏移量，然后再加上ASLR造成的偏移</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 链接时程序的基址 = slider(ASLR偏移) + __LINKEDIT内存地址 - __LINKEDIT文件偏移</span></span><br><span class="line">uintptr_t linkedit_base = (uintptr_t)slide + linkedit_segment-&gt;vmaddr - linkedit_segment-&gt;fileoff;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 符号表的地址 = 基址 + 符号表偏移量</span></span><br><span class="line">nlist_t *symtab = (nlist_t *)(linkedit_base + symtab_cmd-&gt;symoff);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 字符串表的地址 = 基址 + 字符串表偏移量</span></span><br><span class="line"><span class="keyword">char</span> *strtab = (<span class="keyword">char</span> *)(linkedit_base + symtab_cmd-&gt;stroff);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 动态符号表地址 = 基址 + 动态符号表偏移量</span></span><br><span class="line">uint32_t *indirect_symtab = (uint32_t *)(linkedit_base + dysymtab_cmd-&gt;indirectsymoff);</span><br></pre></td></tr></table></figure>
+<p>之后然后再次遍<code>loadcommands</code>，查找整个镜像中的 <code>SECTION_TYPE</code> 为 <code>S_LAZY_SYMBOL_POINTERS</code> 或者 <code>S_NON_LAZY_SYMBOL_POINTERS</code> 的 <code>section</code>，并调用<code>perform_rebinding_with_section</code>对<code>__nl_symbol_ptr</code>以及<code>__la_symbol_ptr</code>进行<code>rebind</code></p>
+<h2 id="perform__rebinding__with__section">perform _rebinding _with _section</h2><p>接下来还有一个很重要的函数</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> perform_rebinding_with_section(<span class="keyword">struct</span> rebindings_entry *rebindings,</span><br><span class="line">                                           section_t *section,</span><br><span class="line">                                           intptr_t slide,</span><br><span class="line">                                           nlist_t *symtab,</span><br><span class="line">                                           <span class="keyword">char</span> *strtab,</span><br><span class="line">                                           uint32_t *indirect_symtab) &#123;</span><br><span class="line">                                           </span><br><span class="line">    <span class="comment">// `nl_symbol_ptr`和`la_symbol_ptr`section中的`reserved1`字段指明对应的`indirect symbol table`起始的index</span></span><br><span class="line">    <span class="comment">// 动态符号表中第一个解析的符号的起始地址</span></span><br><span class="line">  uint32_t *indirect_symbol_indices = indirect_symtab + section-&gt;reserved1;</span><br><span class="line">  <span class="keyword">void</span> **indirect_symbol_bindings = (<span class="keyword">void</span> **)((uintptr_t)slide + section-&gt;addr);</span><br><span class="line">  <span class="keyword">for</span> (uint i = <span class="number">0</span>; i &lt; section-&gt;size / <span class="keyword">sizeof</span>(<span class="keyword">void</span> *); i++) &#123;</span><br><span class="line">    uint32_t symtab_index = indirect_symbol_indices[i];</span><br><span class="line">    <span class="keyword">if</span> (symtab_index == INDIRECT_SYMBOL_ABS || symtab_index == INDIRECT_SYMBOL_LO<span class="built_in">CAL</span> ||</span><br><span class="line">        symtab_index == (INDIRECT_SYMBOL_LO<span class="built_in">CAL</span>   | INDIRECT_SYMBOL_ABS)) &#123;</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    uint32_t strtab_offset = symtab[symtab_index]<span class="variable">.n_un</span><span class="variable">.n_strx</span>;</span><br><span class="line">    <span class="keyword">char</span> *symbol_name = strtab + strtab_offset;</span><br><span class="line">    <span class="keyword">if</span> (strnlen(symbol_name, <span class="number">2</span>) &lt; <span class="number">2</span>) &#123;</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">struct</span> rebindings_entry *cur = rebindings;</span><br><span class="line">    <span class="keyword">while</span> (cur) &#123;</span><br><span class="line">      <span class="keyword">for</span> (uint j = <span class="number">0</span>; j &lt; cur-&gt;rebindings_nel; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (strcmp(&amp;symbol_name[<span class="number">1</span>], cur-&gt;rebindings[j]<span class="variable">.name</span>) == <span class="number">0</span>) &#123;</span><br><span class="line">          <span class="keyword">if</span> (cur-&gt;rebindings[j]<span class="variable">.replaced</span> != <span class="literal">NULL</span> &amp;&amp;</span><br><span class="line">              indirect_symbol_bindings[i] != cur-&gt;rebindings[j]<span class="variable">.replacement</span>) &#123;</span><br><span class="line">            *(cur-&gt;rebindings[j]<span class="variable">.replaced</span>) = indirect_symbol_bindings[i];</span><br><span class="line">          &#125;</span><br><span class="line">          indirect_symbol_bindings[i] = cur-&gt;rebindings[j]<span class="variable">.replacement</span>;</span><br><span class="line">          <span class="keyword">goto</span> symbol_loop;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      cur = cur-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">  symbol_loop:;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>通过 <code>indirect_symtab</code> + <code>section-&gt;reserved1</code> 获取 <code>indirect_symbol_indices</code>，也就是符号表的数组</p>
+</li>
+<li><p>通过 <code>(void **)((uintptr_t)slide + section-&gt;addr)</code> 获取函数指针列表 <code>indirect_symbol_bindings</code></p>
+</li>
+<li><p>遍历符号表数组 <code>indirect_symbol_indices</code> 中的所有符号表中，获取其中的符号表索引 <code>symtab_index</code></p>
+</li>
+<li><p>通过符号表索引 <code>symtab_index</code> 获取符号表中某一个 <code>n_list</code> 结构体，得到字符串表中的索引 <code>symtab[symtab _index].n_un.n_strx</code></p>
+</li>
+<li><p>最后在字符串表中获得符号的名字 <code>char *symbol_name</code></p>
+</li>
+</ul>
+<p>最后就是将符号表中的 <code>symbol_name</code> 与 <code>rebinding</code> 中的名字 <code>name</code> 进行比较，如果匹配，进行实现替换，达到函数替换的目的</p>
+<h2 id="总结">总结</h2><p>程序运行时，动态链接的 <code>C</code> 函数地址会记录在<code>__DATA segment</code> 的<code>la_symbol_ptr</code>中；初始时，程序只知道函数的符号名而不知道函数的实现地址；首次调用时，程序通过<code>__TEXT segment</code>中的<code>stub_helper</code>取得绑定信息，通过<code>dyld_stub_binder</code>来更新<code>la_symbol_ptr</code>中的符号实现地址；这样，再次调用时，就可以通过<code>la_symbol_ptr</code>直接找到函数的实现；如果要实现函数的替换，只需要修改<code>__la_symbol_ptr</code>中的符号实现地址.</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/09/11/Mach-O与有趣的dyld/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Mach-O与有趣的dyld</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="强大的Fishhook" data-title="强大的Fishhook" data-url="http://yoursite.com/2017/09/25/强大的Fishhook/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"aeronxie"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Aeron_Xie
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
