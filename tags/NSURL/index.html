@@ -3,24 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>链式编程 | Aeron_Xie</title>
+  <title>Tag: NSURL | Aeron_Xie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="链式编程
-链式编程思想:就是将多个操作（多行代码）通过点号(.)链接在一起成为一句代码,使代码可读性好
-链式编程特点:方法的返回值是block,block必须有返回值（本身对象），block参数（需要操作的值）">
-<meta property="og:type" content="article">
-<meta property="og:title" content="链式编程">
-<meta property="og:url" content="http://yoursite.com/2016/03/08/链式编程/index.html">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Aeron_Xie">
+<meta property="og:url" content="http://yoursite.com/tags/NSURL/index.html">
 <meta property="og:site_name" content="Aeron_Xie">
-<meta property="og:description" content="链式编程
-链式编程思想:就是将多个操作（多行代码）通过点号(.)链接在一起成为一句代码,使代码可读性好
-链式编程特点:方法的返回值是block,block必须有返回值（本身对象），block参数（需要操作的值）">
-<meta property="og:updated_time" content="2016-03-12T12:11:50.000Z">
+<meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="链式编程">
-<meta name="twitter:description" content="链式编程
-链式编程思想:就是将多个操作（多行代码）通过点号(.)链接在一起成为一句代码,使代码可读性好
-链式编程特点:方法的返回值是block,block必须有返回值（本身对象），block参数（需要操作的值）">
+<meta name="twitter:title" content="Aeron_Xie">
+<meta name="twitter:description">
   
     <link rel="alternative" href="/atom.xml" title="Aeron_Xie" type="application/atom+xml">
   
@@ -219,206 +212,53 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-链式编程" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2016/03/08/链式编程/" class="article-date">
-  	<time datetime="2016-03-08T02:26:38.000Z" itemprop="datePublished">2016-03-08</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/10/16/初探NSURLProtocol/" class="archive-article-date">
+  	<time datetime="2017-10-16T03:39:27.000Z" itemprop="datePublished">Oct 16</time>
 </a>
-    </div>
+        </div>
+    	 
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      链式编程
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/10/16/初探NSURLProtocol/">初探NSURLProtocol</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NSURL/">NSURL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Network/">Network</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
 	</div>
 
-        
+          
 
+        </div>
         <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="链式编程">链式编程</h2><blockquote>
-<p>链式编程思想:就是将多个操作（多行代码）通过点号(.)链接在一起成为一句代码,使代码可读性好</p>
-<p>链式编程特点:方法的返回值是block,block必须有返回值（本身对象），block参数（需要操作的值）</p>
-</blockquote>
-<a id="more"></a>
-<p>我们经常使用的开源框架 <a href="https://github.com/SnapKit/Masonry" target="_blank" rel="external">Masonry</a> 就是使用这样的编程思想,通过点语法来进行多个操作</p>
-<pre><code><span class="collection">[view mas_makeConstraints:^<span class="list">(<span class="keyword">MASConstraintMaker</span> *make)</span> <span class="collection">{
-        make.top.equalTo<span class="list">(<span class="keyword">superview.mas_top</span>)</span>.with.offset<span class="list">(<span class="keyword">padding.top</span>)</span><span class="comment">;</span>
-        make.left.equalTo<span class="list">(<span class="keyword">superview.mas_left</span>)</span>.with.offset<span class="list">(<span class="keyword">padding.left</span>)</span><span class="comment">;</span>
-        make.bottom.equalTo<span class="list">(<span class="keyword">superview.mas_bottom</span>)</span>.with.offset<span class="list">(<span class="keyword">-padding.bottom</span>)</span><span class="comment">;</span>
-        make.right.equalTo<span class="list">(<span class="keyword">superview.mas_right</span>)</span>.with.offset<span class="list">(<span class="keyword">-padding.right</span>)</span><span class="comment">;</span>
-}</span>]</span><span class="comment">;</span>
-</code></pre><p>通过学习，试着用链式思想写一个简单的计算器</p>
-<p>首先我们需要创建一个计算类，一个结果属性，和计算需要的方法    </p>
-<pre><code><span class="class"><span class="keyword">@interface</span> <span class="title">CaculatorMaker</span> : <span class="title">NSObject</span></span>
-
-<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">NSInteger</span> result;
-<span class="comment">//加</span>
--(CaculatorMaker *(^)(<span class="built_in">NSInteger</span>))add;
-<span class="comment">//减</span>
--(CaculatorMaker *(^)(<span class="built_in">NSInteger</span>))subtract;
-<span class="comment">//乘</span>
--(CaculatorMaker *(^)(<span class="built_in">NSInteger</span>))multiply;
-<span class="comment">//除</span>
--(CaculatorMaker *(^)(<span class="built_in">NSInteger</span>))divide;
-
-<span class="keyword">@end</span>
-</code></pre><p>–</p>
-<pre><code><span class="class"><span class="keyword">@implementation</span> <span class="title">CaculatorMaker</span></span>
-
-<span class="comment">/**加*/</span>
--(CaculatorMaker *(^)(<span class="built_in">NSInteger</span>))add {
-
-    <span class="keyword">return</span> ^CaculatorMaker *(<span class="built_in">NSInteger</span> number) {
-        _result += number;
-        <span class="keyword">return</span> <span class="keyword">self</span>;
-    };
-
-}
-
-<span class="comment">/**减*/</span>
--(CaculatorMaker *(^)(<span class="built_in">NSInteger</span>))subtract {
-
-    <span class="keyword">return</span> ^CaculatorMaker *(<span class="built_in">NSInteger</span> number) {
-        _result -= number;
-        <span class="keyword">return</span> <span class="keyword">self</span>;
-    };
-
-}
-
-<span class="comment">/**乘*/</span>
--(CaculatorMaker *(^)(<span class="built_in">NSInteger</span>))multiply {
-
-    <span class="keyword">return</span> ^CaculatorMaker *(<span class="built_in">NSInteger</span> number) {
-        _result *= number;
-        <span class="keyword">return</span> <span class="keyword">self</span>;
-    };
-
-}
-
-<span class="comment">/**除*/</span>
--(CaculatorMaker *(^)(<span class="built_in">NSInteger</span>))divide {
-
-    <span class="keyword">return</span> ^CaculatorMaker *(<span class="built_in">NSInteger</span> number) {
-        _result /= number;
-        <span class="keyword">return</span> <span class="keyword">self</span>;
-    };
-
-}
-<span class="keyword">@end</span>
-</code></pre><p><strong>为了让所有的对象都能够计算，所以我们还需要写一个 <code>NSObject</code> 的分类</strong></p>
-<pre><code><span class="preprocessor">#import <span class="title">"CaculatorMaker.h"</span></span>
-<span class="class"><span class="keyword">@interface</span> <span class="title">NSObject</span> (<span class="title">Caculator</span>)</span>
-+ (<span class="built_in">NSInteger</span>)makeCaculator:(<span class="keyword">void</span>(^)(CaculatorMaker *))block;
-<span class="keyword">@end</span>
-</code></pre><p>–</p>
-<pre><code><span class="comment">#import "NSObject+Caculator.h"</span>
-
-@implementation <span class="type">NSObject</span> (<span class="type">Caculator</span>)
-
-+(<span class="type">NSInteger</span>)makeCaculator:(<span class="type">void</span> (^)(<span class="type">CaculatorMaker</span> *))<span class="keyword">block</span> {
-
-    //创建计算制造者
-    <span class="type">CaculatorMaker</span> *maker = [[<span class="type">CaculatorMaker</span> alloc]init];
-    <span class="keyword">block</span>(maker);
-    <span class="keyword">return</span> maker.<span class="literal">result</span>;
-}
-@<span class="keyword">end</span>
-</code></pre><p>最后我们在调用的时候</p>
-<pre><code><span class="type">NSInteger</span> <span class="literal">result</span> = [<span class="type">NSObject</span> makeCaculator:^(<span class="type">CaculatorMaker</span> *maker) {
-    //所有的计算操作都放在这里
-    maker.add(<span class="number">10</span>).subtract(<span class="number">2</span>).multiply(<span class="number">3</span>).divide(<span class="number">4</span>);
-}];
-<span class="type">NSLog</span>(@<span class="string">"%ld"</span>,<span class="literal">result</span>);
-</code></pre><h3 id="总结">总结</h3><p><em>链式编程的特点就是方法返回值必须是一个block，block也必须有返回值（本身）</em></p>
-
-      
-    </div>
-    
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2016/03/09/Reactivecocoa-简单用法/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Reactivecocoa 简单用法
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/03/08/Swizzling-黑魔法/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Swizzling 黑魔法</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
-
-<div class="share">
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style">
-		<span class="jiathis_txt">分享到：</span>
-		<a class="jiathis_button_tsina"></a>
-		<a class="jiathis_button_cqq"></a>
-		<a class="jiathis_button_douban"></a>
-		<a class="jiathis_button_weixin"></a>
-		<a class="jiathis_button_tumblr"></a>
-		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	</div>
-	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
-</div>
-
-
-
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="链式编程" data-title="链式编程" data-url="http://yoursite.com/2016/03/08/链式编程/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"aeronxie"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
-
+    
 
 </div>
       <footer id="footer">
@@ -444,9 +284,9 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false
 	}
