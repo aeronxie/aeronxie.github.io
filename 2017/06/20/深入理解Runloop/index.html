@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/RunLoop_1.png">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/436C3B06-5744-459C-ADF0-CAE74FA672B6.png">
 <meta property="og:image" content="http://7xoijj.com1.z0.glb.clouddn.com/B7B2FF3E-2CF6-4077-B83F-326F6A194E94.png">
-<meta property="og:updated_time" content="2017-06-25T14:38:51.000Z">
+<meta property="og:updated_time" content="2017-10-16T06:13:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解Runloop">
 <meta name="twitter:description" content="最近在研究检测页面卡顿的问题，发现基本上都是基于Runloop的，所以打算把Runloop再好好复习一遍，于是就把学习的过程记录一下。
@@ -264,22 +264,25 @@
 <p>最近在研究检测页面卡顿的问题，发现基本上都是基于Runloop的，所以打算把Runloop再好好复习一遍，于是就把学习的过程记录一下。</p>
 </blockquote>
 <h6 id="在OSX/iOS_系统中，提供了两个对象：NSRunLoop（线程不安全）_和_CFRunLoopRef（线程安全）。但是NSRunloop是闭源的，我们无法直接查看到内部实现，但是CFRunLoopRef是开源的，CFRunLoopRef_在_CoreFoundation_框架内，它提供了纯_C_函数的_API，接下来我们就分析一下CFRunLoopRef的内部实现。目前最新的版本是_CF-855-17-">在OSX/iOS 系统中，提供了两个对象：<code>NSRunLoop</code>（线程不安全） 和 <code>CFRunLoopRef</code>（线程安全）。但是<code>NSRunloop</code>是闭源的，我们无法直接查看到内部实现，但是<code>CFRunLoopRef</code>是<a href="https://opensource.apple.com/tarballs/CF/" target="_blank" rel="external">开源</a>的，<code>CFRunLoopRef</code> 在 <code>CoreFoundation</code> 框架内，它提供了纯 C 函数的 API，接下来我们就分析一下<code>CFRunLoopRef</code>的内部实现。目前最新的版本是 <code>CF-855.17</code>.</h6><a id="more"></a>
-<h4 id="在开发中，我们可以通过两种方式来获取线程，">在开发中，我们可以通过两种方式来获取线程，</h4><h5 id="NSThread：">NSThread：</h5><ul>
+<p>在开发中，我们可以通过两种方式来获取线程，</p>
+<p>NSThread：</p>
+<ul>
 <li><p><code>[NSThread mainThread]</code>获取主线程</p>
 </li>
 <li><p><code>[NSThread currentThread]</code>获取当前线程</p>
 </li>
 </ul>
-<h5 id="pthread：">pthread：</h5><ul>
-<li><p><code>pthread_main_np()</code>获取主线程</p>
+<p>pthread：</p>
+<ul>
+<li><p><code>pthread_main_np()</code> 获取主线程</p>
 </li>
-<li><p><code>pthread_self()</code>获取当前线程</p>
+<li><p><code>pthread_self()</code> 获取当前线程</p>
 </li>
 </ul>
 <blockquote>
 <p>CFRunLoop 是基于 pthread 来管理的。</p>
 </blockquote>
-<h5 id="看一看出这两者是一一对应的，但是没有找到这两者的转换方式-_不过我们可以用pthread_t_pthread_from_mach_thread_np(mach_port_t)进行pthread_t和mach_port_t两者的转换。_task_threads这个函数可以返回任务中的线程列表。">看一看出这两者是一一对应的，但是没有找到这两者的转换方式. 不过我们可以用<code>pthread_t pthread_from_mach_thread_np(mach_port_t)</code>进行<code>pthread_t</code>和<code>mach_port_t</code>两者的转换。 <code>task_threads</code>这个函数可以返回任务中的线程列表。</h5><pre><code>mach_msg_type_number_t count<span class="comment">;</span>
+<h5 id="可以看出这两者是一一对应的，但是没有找到这两者的转换方式-_不过我们可以用pthread_t_pthread_from_mach_thread_np(mach_port_t)进行pthread_t和mach_port_t两者的转换。_task_threads这个函数可以返回任务中的线程列表。">可以看出这两者是一一对应的，但是没有找到这两者的转换方式. 不过我们可以用<code>pthread_t pthread_from_mach_thread_np(mach_port_t)</code>进行<code>pthread_t</code>和<code>mach_port_t</code>两者的转换。 <code>task_threads</code>这个函数可以返回任务中的线程列表。</h5><pre><code>mach_msg_type_number_t count<span class="comment">;</span>
 thread_act_array_t list<span class="comment">;</span>
 task_threads<span class="list">(<span class="keyword">mach_task_self</span><span class="list">()</span>, <span class="keyword">&amp;list</span>, <span class="keyword">&amp;count</span>)</span><span class="comment">;</span>
 </code></pre><h4 id="我们不能直接创建RunLoop,我们也可以通过两种方式来获取，">我们不能直接创建<code>RunLoop</code>,我们也可以通过两种方式来获取，</h4><h5 id="NSRunLoop：">NSRunLoop：</h5><ul>
